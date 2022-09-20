@@ -1,3 +1,11 @@
+{% comment %}
+
+Custom section created by JadePuma
+Instructions - https://jadepuma.com/blogs/shopify-tutorials/brand-guidelines-section-for-the-flex-theme
+Last editted - 19Sep22
+
+{% endcomment %}
+
 {%- assign id = section.id -%}
 
 {% comment %} Section specific CSS {% endcomment %}
@@ -342,7 +350,7 @@ id: id
 
         <div class="typo-table">
           <div>
-			<div class="buttons is-center"> <a href="#" class="button button--primary ">Primary Button</a></div>
+      <div class="buttons is-center"> <a href="#" class="button button--primary ">Primary Button</a></div>
             <div class="buttons is-center"> <a href="#" class="button button--secondary ">Secondary Button</a></div>
             <button type="submit" name="add" class="button action_button button--add-to-cart action_button--primary" data-label="Add to cart" data-add-to-cart-trigger=""> 
               <span class="text">Add to cart</span> </button>
@@ -496,8 +504,11 @@ id: id
         <p>{{ section.settings.tools }}</p>
         {% if tool-blocks > 0 %}
         {% for block in section.blocks %}
+        {% if block.type == 'tool-header' %}
+          <h3>{{ block.settings.header }}</h3>
+        {% endif %}
         {% if block.type == 'tool-link' %}
-        <p>{{ block.settings.link_title }} - <a href="{{ block.settings.tool_link }}">{{ block.settings.tool_link }}</a></p>
+          <p>&nbsp;&nbsp;&nbsp;{{ block.settings.link_title }} - <a href="{{ block.settings.tool_link }}">{{ block.settings.tool_link }}</a></p>
         {% endif %}
         {% endfor %}
         {% endif %}   
@@ -832,6 +843,17 @@ id: id
           "type": "image_picker",
           "id": "pattern-image",
           "label": "Pattern Image"
+        }
+      ]
+    },
+    {
+      "type": "tool-header",
+      "name": "Tool Header",
+      "settings": [
+        {
+          "type": "text",
+          "id": "header",
+          "label": "Header"
         }
       ]
     },
