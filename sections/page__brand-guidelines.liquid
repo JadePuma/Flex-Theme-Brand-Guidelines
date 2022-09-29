@@ -2,7 +2,7 @@
 
 Custom section created by JadePuma
 Instructions - https://jadepuma.com/blogs/shopify-tutorials/brand-guidelines-section-for-the-flex-theme
-Last editted - 19Sep22
+Last editted - 29Sep22
 
 {% endcomment %}
 
@@ -118,6 +118,7 @@ id: id
 {% assign pattern-blocks = 0 %}
 {% assign color-blocks = 0 %}
 {% assign tool-blocks = 0 %}
+{% assign tutorial-blocks = 0 %}
 
 {% if section.blocks.size > 0 %}
   {% for block in section.blocks %}
@@ -131,6 +132,8 @@ id: id
       {% assign pattern-blocks = pattern-blocks | plus: 1 %}
       {% elsif block.type == "tool-link" %}
       {% assign tool-blocks = tool-blocks | plus: 1 %}
+      {% elsif block.type == "tutorial-link" %}
+      {% assign tutorial-blocks = tutorial-blocks | plus: 1 %}
       {% elsif block.type == "color" %}
       {% assign color-blocks = color-blocks | plus: 1 %}
     {% endif %}
@@ -513,6 +516,21 @@ id: id
         {% endfor %}
         {% endif %}   
         {% endif %}
+
+        {% if section.settings.show-tutorials %}
+        <h2 class="section-heading">Video Tutorials</h2>
+        <p>{{ section.settings.tutorials }}</p>
+        {% if tutorial-blocks > 0 %}
+        {% for block in section.blocks %}
+        {% if block.type == 'tutorial-header' %}
+          <h3>{{ block.settings.header }}</h3>
+        {% endif %}
+        {% if block.type == 'tutorial-link' %}
+          <p>&nbsp;&nbsp;&nbsp;{{ block.settings.link_title }} - <a href="{{ block.settings.tutorial_link }}">{{ block.settings.tutorial_link }}</a></p>
+        {% endif %}
+        {% endfor %}
+        {% endif %}   
+        {% endif %}
         
       </div>
     </div>
@@ -683,6 +701,21 @@ id: id
 {
 "type": "textarea",
 "id": "tools",
+"label": "Explanation"
+},
+  {
+"type": "header",
+"content": "Video Tutorials"
+},
+{
+"type": "checkbox",
+"id": "show-tutorials",
+"label": "Show section",
+"default": false
+},
+{
+"type": "textarea",
+"id": "tutorials",
 "label": "Explanation"
 },
 {
@@ -870,6 +903,34 @@ id: id
         {
           "type": "url",
           "id": "tool_link",
+          "label": "Link"
+        }
+      ]
+    },
+    {
+      "type": "tutorial-header",
+      "name": "Video Tutorial Header",
+      "settings": [
+        {
+          "type": "text",
+          "id": "header",
+          "label": "Header"
+        }
+      ]
+    },
+    {
+      "type": "tutorial-link",
+      "name": "Video Tutorial Link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "link_title",
+          "label": "Title",
+          "default": "Video Tutorial"
+        },
+        {
+          "type": "url",
+          "id": "tutorial_link",
           "label": "Link"
         }
       ]
