@@ -2,7 +2,7 @@
 
 Custom section created by JadePuma
 Instructions - https://jadepuma.com/blogs/shopify-tutorials/brand-guidelines-section-for-the-flex-theme
-Last editted - 29Sep22
+Last editted - 22Jul23
 
 {% endcomment %}
 
@@ -175,6 +175,66 @@ id: id
         <h2 class="section-heading">Brand Story</h2>
         <p>{{ section.settings.mission }}</p>
         {% endif %}     
+
+        {% if section.settings.show-shopify-brand-settings %}
+        <h2 class="section-heading">Shopify Brand Setttings</h2>
+        <h3>Brand Colors</h3>
+        <div class="color-array">
+          {% if shop.brand.colors.primary[0].background != blank %}
+            <div>
+            Primary Background - {{ shop.brand.colors.primary[0].background }}
+            <br><div class="color-swatch" style="background-color: {{ shop.brand.colors.primary[0].background }}">&nbsp;</div>
+            </div>
+          {% endif %}
+          {% if shop.brand.colors.primary[0].foreground != blank %}
+            <div>
+            Primary Foreground - {{ shop.brand.colors.primary[0].foreground }}
+            <br><div class="color-swatch" style="background-color: {{ shop.brand.colors.primary[0].foreground }}">&nbsp;</div>
+            </div>
+          {% endif %}
+          {% if shop.brand.colors.secondary[0].background != blank %}
+            <div>
+            Primary Background - {{ shop.brand.colors.secondary[0].background }}
+            <br><div class="color-swatch" style="background-color: {{ shop.brand.colors.secondary[0].background }}">&nbsp;</div>
+            </div>
+          {% endif %}
+          {% if shop.brand.colors.secondary[1].background != blank %}
+            <div>
+            Primary Background - {{ shop.brand.colors.secondary[1].background }}
+            <br><div class="color-swatch" style="background-color: {{ shop.brand.colors.secondary[1].background }}">&nbsp;</div>
+            </div>
+          {% endif %}
+          {% if shop.brand.colors.secondary[0].foreground != blank %}
+            <div>
+            Primary Background - {{ shop.brand.colors.secondary[0].foreground }}
+            <br><div class="color-swatch" style="background-color: {{ shop.brand.colors.secondary[0].foreground }}">&nbsp;</div>
+            </div>
+          {% endif %}
+
+        </div>
+        <h3>Logos</h3>
+
+          {% if shop.brand.logo != blank %}
+          {%- assign image = shop.brand.logo -%}
+          <h4>Brand Logo </h4>
+          {% render 'image-element', image: image, alt: 'Color Logo' %}      
+          {% endif %}
+
+          {% if shop.brand.square_logo != blank %}
+          {%- assign image = shop.brand.square_logo -%}
+          <h4>Square Logo </h4>
+          {% render 'image-element', image: image, alt: 'Square Logo' %}      
+          {% endif %}
+
+          {%- assign image = page_image | img_url -%}
+          <h4>Social Logo </h4>
+        <img src="{{ page_image | img_url }}">
+        
+        <h3>Short Description</h3>
+        <p>{{ shop.brand.short_description }}</p>
+        <h3>Slogan</h3>
+        <p>{{ shop.brand.slogan }}</p>
+        {% endif %}   
         
         {% if section.settings.show-logos %}
         <div class="logos">
@@ -573,6 +633,16 @@ id: id
 "type": "textarea",
 "id": "mission",
 "label": "Brand Story"
+},
+{
+"type": "header",
+"content": "Shopify Brand Settings"
+},
+{
+"type": "checkbox",
+"id": "show-shopify-brand-settings",
+"label": "Show Shopify brand settings",
+"default": false
 },
 {
 "type": "header",
