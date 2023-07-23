@@ -173,7 +173,22 @@ id: id
 
         {% if section.settings.show-mission %}
         <h2 class="section-heading">Brand Story</h2>
-        <p>{{ section.settings.mission }}</p>
+        {% if section.settings.about-brand != blank %}
+          <h3>About the Brand</h3>
+          <p>{{ section.settings.about-brand }}</p>
+        {% endif %}
+        {% if section.settings.target-audience != blank %}
+          <h3>Target Audience</h3>
+          <p>{{ section.settings.target-audience }}</p>
+        {% endif %}
+        {% if section.settings.mission != blank %}
+          <h3>Mission</h3>
+          <p>{{ section.settings.mission }}</p>
+        {% endif %}
+        {% if section.settings.tone-personality != blank %}
+          <h3>Tone / Personality</h3>
+          <p>{{ section.settings.tone-personality }}</p>
+        {% endif %}
         {% endif %}     
 
         {% if section.settings.show-shopify-brand-settings %}
@@ -631,8 +646,23 @@ id: id
 },
 {
 "type": "textarea",
+"id": "about-brand",
+"label": "About the brand"
+},
+{
+"type": "textarea",
+"id": "target-audience",
+"label": "Target Audience"
+},
+{
+"type": "textarea",
 "id": "mission",
-"label": "Brand Story"
+"label": "Mission"
+},
+{
+"type": "textarea",
+"id": "tone-personality",
+"label": "Tone / Personality"
 },
 {
 "type": "header",
