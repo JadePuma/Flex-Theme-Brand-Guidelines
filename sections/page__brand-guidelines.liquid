@@ -2,7 +2,7 @@
 
 Custom section created by JadePuma
 Instructions - https://jadepuma.com/blogs/shopify-tutorials/brand-guidelines-section-for-the-flex-theme
-Last editted - 23Jul23
+Last editted - 3Aug23
 
 {% endcomment %}
 
@@ -171,6 +171,18 @@ id: id
           <h3>About the Brand</h3>
           <p>{{ section.settings.about-brand }}</p>
         {% endif %}
+        {% if section.settings.about-product != blank %}
+          <h3>About the Product</h3>
+          <p>{{ section.settings.about-product }}</p>
+        {% endif %}
+        {% if section.settings.product-why != blank %}
+          <h3>Higher Level Benefits</h3>
+          <p>{{ section.settings.product-why }}</p>
+        {% endif %}
+        {% if section.settings.about-differentiator!= blank %}
+          <h3>Brand Differentiator</h3>
+          <p>{{ section.settings.about-differentiator }}</p>
+        {% endif %}
         {% if section.settings.target-audience != blank %}
           <h3>Target Audience</h3>
           <p>{{ section.settings.target-audience }}</p>
@@ -185,65 +197,8 @@ id: id
         {% endif %}
         {% endif %}     
 
-        {% if section.settings.show-shopify-brand-settings %}
-        <h2 class="section-heading">Shopify Brand Setttings</h2>
-        <h3>Brand Colors</h3>
-        <div class="color-array">
-          {% if shop.brand.colors.primary[0].background != blank %}
-            <div>
-            Primary Background - {{ shop.brand.colors.primary[0].background }}
-            <br><div class="color-swatch" style="background-color: {{ shop.brand.colors.primary[0].background }}">&nbsp;</div>
-            </div>
-          {% endif %}
-          {% if shop.brand.colors.primary[0].foreground != blank %}
-            <div>
-            Primary Foreground - {{ shop.brand.colors.primary[0].foreground }}
-            <br><div class="color-swatch" style="background-color: {{ shop.brand.colors.primary[0].foreground }}">&nbsp;</div>
-            </div>
-          {% endif %}
-          {% if shop.brand.colors.secondary[0].background != blank %}
-            <div>
-            Primary Background - {{ shop.brand.colors.secondary[0].background }}
-            <br><div class="color-swatch" style="background-color: {{ shop.brand.colors.secondary[0].background }}">&nbsp;</div>
-            </div>
-          {% endif %}
-          {% if shop.brand.colors.secondary[1].background != blank %}
-            <div>
-            Primary Background - {{ shop.brand.colors.secondary[1].background }}
-            <br><div class="color-swatch" style="background-color: {{ shop.brand.colors.secondary[1].background }}">&nbsp;</div>
-            </div>
-          {% endif %}
-          {% if shop.brand.colors.secondary[0].foreground != blank %}
-            <div>
-            Primary Background - {{ shop.brand.colors.secondary[0].foreground }}
-            <br><div class="color-swatch" style="background-color: {{ shop.brand.colors.secondary[0].foreground }}">&nbsp;</div>
-            </div>
-          {% endif %}
-
-        </div>
-        <h3>Logos</h3>
-
-          {% if shop.brand.logo != blank %}
-          {%- assign image = shop.brand.logo -%}
-          <h4>Brand Logo </h4>
-          {% render 'image-element', image: image, alt: 'Color Logo' %}      
-          {% endif %}
-
-          {% if shop.brand.square_logo != blank %}
-          {%- assign image = shop.brand.square_logo -%}
-          <h4>Square Logo </h4>
-          {% render 'image-element', image: image, alt: 'Square Logo' %}      
-          {% endif %}
-
-          {%- assign image = page_image | img_url -%}
-          <h4>Social Logo </h4>
-        <img src="{{ page_image | img_url }}">
         
-        <h3>Short Description</h3>
-        <p>{{ shop.brand.short_description }}</p>
-        <h3>Slogan</h3>
-        <p>{{ shop.brand.slogan }}</p>
-        {% endif %}   
+
         
         {% if section.settings.show-logos %}
         <div class="logos">
@@ -541,6 +496,79 @@ id: id
         </div>
         {% endif %}
 
+        {% if section.settings.show-pattern %}
+        <h2 class="section-heading">Pattern and Texture</h2>
+        <p>{{ section.settings.pattern }}</p>
+        {% if pattern-blocks > 0 %}
+          {% for block in section.blocks %}
+            {% if block.type == 'pattern-image' %}
+              {% assign image = block.settings.pattern-image %}
+              {% render 'image-element', image: image, alt: 'Pattern or Texture' %}  
+            {% endif %}
+          {% endfor %}
+        {% endif %}   
+        {% endif %}
+
+        {% if section.settings.show-shopify-brand-settings %}
+        <h2 class="section-heading">Shopify Brand Setttings</h2>
+        <h3>Brand Colors</h3>
+        <div class="color-array">
+          {% if shop.brand.colors.primary[0].background != blank %}
+            <div>
+            Primary Background - {{ shop.brand.colors.primary[0].background }}
+            <br><div class="color-swatch" style="background-color: {{ shop.brand.colors.primary[0].background }}">&nbsp;</div>
+            </div>
+          {% endif %}
+          {% if shop.brand.colors.primary[0].foreground != blank %}
+            <div>
+            Primary Foreground - {{ shop.brand.colors.primary[0].foreground }}
+            <br><div class="color-swatch" style="background-color: {{ shop.brand.colors.primary[0].foreground }}">&nbsp;</div>
+            </div>
+          {% endif %}
+          {% if shop.brand.colors.secondary[0].background != blank %}
+            <div>
+            Primary Background - {{ shop.brand.colors.secondary[0].background }}
+            <br><div class="color-swatch" style="background-color: {{ shop.brand.colors.secondary[0].background }}">&nbsp;</div>
+            </div>
+          {% endif %}
+          {% if shop.brand.colors.secondary[1].background != blank %}
+            <div>
+            Primary Background - {{ shop.brand.colors.secondary[1].background }}
+            <br><div class="color-swatch" style="background-color: {{ shop.brand.colors.secondary[1].background }}">&nbsp;</div>
+            </div>
+          {% endif %}
+          {% if shop.brand.colors.secondary[0].foreground != blank %}
+            <div>
+            Primary Background - {{ shop.brand.colors.secondary[0].foreground }}
+            <br><div class="color-swatch" style="background-color: {{ shop.brand.colors.secondary[0].foreground }}">&nbsp;</div>
+            </div>
+          {% endif %}
+        </div>
+        
+        <h3>Logos</h3>
+
+          {% if shop.brand.logo != blank %}
+          {%- assign image = shop.brand.logo -%}
+          <h4>Brand Logo </h4>
+          {% render 'image-element', image: image, alt: 'Color Logo' %}      
+          {% endif %}
+
+          {% if shop.brand.square_logo != blank %}
+          {%- assign image = shop.brand.square_logo -%}
+          <h4>Square Logo </h4>
+          {% render 'image-element', image: image, alt: 'Square Logo' %}      
+          {% endif %}
+
+          {%- assign image = page_image | img_url -%}
+          <h4>Social Logo </h4>
+        <img src="{{ page_image | img_url }}">
+        
+        <h3>Short Description</h3>
+        <p>{{ shop.brand.short_description }}</p>
+        <h3>Slogan</h3>
+        <p>{{ shop.brand.slogan }}</p>
+        {% endif %}   
+
         {% if section.settings.show-mood-board %}
         <h2 class="section-heading">Mood Board</h2>
         <p>{{ section.settings.mood-board }}</p>
@@ -556,19 +584,6 @@ id: id
         {% endfor %}
         </div>
         {% endif %}       
-        {% endif %}
-
-        {% if section.settings.show-pattern %}
-        <h2 class="section-heading">Pattern and Texture</h2>
-        <p>{{ section.settings.pattern }}</p>
-        {% if pattern-blocks > 0 %}
-        {% for block in section.blocks %}
-        {% if block.type == 'pattern-image' %}
-        {% assign image = block.settings.pattern-image %}
-        {% render 'image-element', image: image, alt: 'Pattern or Texture' %}  
-        {% endif %}
-        {% endfor %}
-        {% endif %}   
         {% endif %}
         
       </div>
@@ -612,6 +627,21 @@ id: id
 "type": "textarea",
 "id": "about-brand",
 "label": "About the brand"
+},
+{
+"type": "textarea",
+"id": "about-product",
+"label": "About the product/service"
+},
+{
+"type": "textarea",
+"id": "product-why",
+"label": "Higher level benefit of product/service"
+},
+{
+"type": "textarea",
+"id": "about-differentiator",
+"label": "Brand differentiator"
 },
 {
 "type": "textarea",
