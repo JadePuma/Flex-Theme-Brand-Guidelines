@@ -2,7 +2,7 @@
 
 Custom section created by JadePuma
 Instructions - https://jadepuma.com/blogs/shopify-tutorials/brand-guidelines-section-for-the-flex-theme
-Last editted - 3Aug23
+Last editted - 27Aug23
 
 {% endcomment %}
 
@@ -165,6 +165,26 @@ id: id
 
       <div class="brand-guidelines">
 
+        {% if section.settings.show-framework %}
+        <h2 class="section-heading">Brand Framework</h2>
+        {% if section.settings.mission-statement != blank %}
+          <h3>Mission Statement</h3>
+          <p>{{ section.settings.mission-statement }}</p>
+        {% endif %}
+        {% if section.settings.vision-statement != blank %}
+          <h3>Vision Statement</h3>
+          <p>{{ section.settings.about-product }}</p>
+        {% endif %}
+        {% if section.settings.usp != blank %}
+          <h3>Unique Selling Propostion (USP)</h3>
+          <p>{{ section.settings.usp }}</p>
+        {% endif %}
+        {% if section.settings.value-proposition != blank %}
+          <h3>Value Proposition</h3>
+          <p>{{ section.settings.value-proposition }}</p>
+        {% endif %}
+        {% endif %}          
+
         {% if section.settings.show-mission %}
         <h2 class="section-heading">Brand Story</h2>
         {% if section.settings.about-brand != blank %}
@@ -179,7 +199,7 @@ id: id
           <h3>Higher Level Benefits</h3>
           <p>{{ section.settings.product-why }}</p>
         {% endif %}
-        {% if section.settings.about-differentiator!= blank %}
+        {% if section.settings.about-differentiator != blank %}
           <h3>Brand Differentiator</h3>
           <p>{{ section.settings.about-differentiator }}</p>
         {% endif %}
@@ -195,11 +215,8 @@ id: id
           <h3>Tone / Personality</h3>
           <p>{{ section.settings.tone-personality }}</p>
         {% endif %}
-        {% endif %}     
+        {% endif %}              
 
-        
-
-        
         {% if section.settings.show-logos %}
         <div class="logos">
           <h2 class="section-heading">Logos</h2>
@@ -612,6 +629,36 @@ id: id
 "type": "color",
 "id": "heading-background-color",
 "label": "Background"
+},
+{
+"type": "header",
+"content": "Brand Framework"
+},
+{
+"type": "checkbox",
+"id": "show-framework",
+"label": "Show section",
+"default": false
+},
+{
+"type": "text",
+"id": "mission-statement",
+"label": "Mission Statement"
+},
+{
+"type": "text",
+"id": "vision-statement",
+"label": "Vision Statement"
+},
+{
+"type": "text",
+"id": "usp",
+"label": "Unique Selling Proposition (USP)"
+},
+{
+"type": "text",
+"id": "value-propostion",
+"label": "Value Proposition"
 },
 {
 "type": "header",
