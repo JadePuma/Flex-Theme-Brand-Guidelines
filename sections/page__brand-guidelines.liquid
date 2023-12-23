@@ -2,7 +2,7 @@
 
 Custom section created by JadePuma
 Instructions - https://jadepuma.com/blogs/shopify-tutorials/brand-guidelines-section-for-the-flex-theme
-Last editted - 27Aug23
+Last editted - 23Dec23
 
 {% endcomment %}
 
@@ -274,7 +274,6 @@ id: id
 
         <h2 class="section-heading">Color Palette</h2>
         
-        
         {% if color-blocks > 0 %}
         <div class="color-array">
           <div>Lightest</div>
@@ -289,11 +288,16 @@ id: id
         <div class="color-swatch" style="background-color: {{ block.settings.color }}"></div>
         <div class="color-swatch" style="background-color: {{ block.settings.color-darker }}"></div>
         <div class="color-swatch" style="background-color: {{ block.settings.color-darkest }}"></div>
-        <div>{{ block.settings.color-lightest }}</div>
-          <div>{{ block.settings.color-lighter }}</div>
-          <div>{{ block.settings.color }}</div>
-          <div>{{ block.settings.color-darker }}</div>
-          <div>{{ block.settings.color-darkest }}</div>
+          {% assign lightest = block.settings.color-lightest | remove: "#" %}
+        <div><a href="https://www.colorhexa.com/{{ lightest }}" target="_blank">{{ block.settings.color-lightest }}</a></div>
+          {% assign lighter = block.settings.color-lighter | remove: "#" %}
+          <div><a href="https://www.colorhexa.com/{{ lighter }}" target="_blank">{{ block.settings.color-lighter }}</a></div>
+          {% assign color = block.settings.color | remove: "#" %}
+          <div><a href="https://www.colorhexa.com/{{ color }}" target="_blank">{{ block.settings.color }}</a></div>
+          {% assign darker = block.settings.color-darker | remove: "#" %}
+          <div><a href="https://www.colorhexa.com/{{ darker }}" target="_blank">{{ block.settings.color-darker }}</a></div>
+          {% assign darkest = block.settings.color-darkest | remove: "#" %}
+          <div><a href="https://www.colorhexa.com/{{ darkest }}" target="_blank">{{ block.settings.color-darkest }}</a></div>
         {% endif %}
         {% endfor %} 
         </div>
@@ -391,6 +395,18 @@ id: id
         </div>     
 
         <div class="heading-divider heading-divider--long"></div>
+
+        <div class="typo-table">
+          <div>
+      <div class="buttons is-center">
+      <a href="#">Text Link</a>
+      </div>
+          </div>
+          <div>
+            Color - {{ settings.link_color }}
+            <br>Hover Color - {{ settings.link_hover_color }}
+          </div>
+        </div>
 
         <div class="typo-table">
           <div>
