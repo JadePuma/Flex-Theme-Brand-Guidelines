@@ -156,12 +156,12 @@ id: id
               {% endif %}">
     <div class="one-whole column content">
 
-      {% render 'heading',
+      {% comment %} {% render 'heading',
               title: page.title,
       heading_tag: 'h1',
       context: 'page',
       text_alignment: section.settings.heading_alignment
-      %}
+      %} {% endcomment %}
 
       <div class="brand-guidelines">
 
