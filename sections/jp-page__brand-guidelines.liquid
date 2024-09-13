@@ -1,8 +1,8 @@
 {% comment %}
 
-Custom section created by JadePuma
-Instructions - https://jadepuma.com/blogs/shopify-tutorials/brand-guidelines-section-for-the-flex-theme
-Last editted - 26Jan24
+  Custom section created by JadePuma
+  Instructions - https://jadepuma.com/blogs/shopify-tutorials/brand-guidelines-section-for-the-flex-theme
+  Last editted - 12Sep24
 
 {% endcomment %}
 
@@ -358,16 +358,39 @@ id: id
 
         <div class="typo-table">
           <div>
-            <p>This is body text</p>
+            <p class="body-text">This is body text</p>
           </div>
           <div>
-            Font - {{ settings.regular__font.family }}
+            Font - {{ settings.regular__font.family }} <span class="body-text-font"> </span>
             <br>Style - {{ settings.regular__font.style }}
             <br>Weight - {{ settings.regular__font.weight }}
             <br>Size - {{ settings.regular_font_size }}
             <br>Color - {{ settings.regular_color }}
           </div>
         </div>
+
+        {% if section.settings.show-actual-font %}
+          <script>
+            document.addEventListener('DOMContentLoaded', function() {
+              var element = document.querySelector('.body-text');
+              var fontDisplayTarget = document.querySelector('.body-text-font');
+              
+              if (element && fontDisplayTarget) {
+                var fontFamily = window.getComputedStyle(element).fontFamily;
+                
+                // Extract the first font-family by splitting the string by commas
+                var firstFontFamily = fontFamily.split(',')[0].trim(); // Trim removes any extra spaces
+                
+                // Create a new span element to display the first font-family
+                var fontDisplay = document.createElement('span');
+                fontDisplay.textContent = ' -- Actual Font: ' + firstFontFamily; // Note the leading space
+                
+                // Append the new span element to the .heading1-font element
+                fontDisplayTarget.appendChild(fontDisplay);
+              }
+            });
+          </script>
+        {% endif %}
         
         <div class="heading-divider heading-divider--long"></div>
         
@@ -386,14 +409,37 @@ id: id
             </div>
           </div>
           <div>
-            Font - {{ settings.nav__font.family }}
+            Font - {{ settings.nav__font.family }} <span class="navbar-link-font"> </span>
             <br>Style - {{ settings.nav__font.style }}
             <br>Weight - {{ settings.nav__font.weight }}
             <br>Size - {{ settings.nav_font_size }}
             <br>Color - {{ settings.header_link_color }}
           </div>
-        </div>     
+        </div>    
 
+        {% if section.settings.show-actual-font %}
+          <script>
+            document.addEventListener('DOMContentLoaded', function() {
+              var element = document.querySelector('.navbar-link');
+              var fontDisplayTarget = document.querySelector('.navbar-link-font');
+              
+              if (element && fontDisplayTarget) {
+                var fontFamily = window.getComputedStyle(element).fontFamily;
+                
+                // Extract the first font-family by splitting the string by commas
+                var firstFontFamily = fontFamily.split(',')[0].trim(); // Trim removes any extra spaces
+                
+                // Create a new span element to display the first font-family
+                var fontDisplay = document.createElement('span');
+                fontDisplay.textContent = ' -- Actual Font: ' + firstFontFamily; // Note the leading space
+                
+                // Append the new span element to the .heading1-font element
+                fontDisplayTarget.appendChild(fontDisplay);
+              }
+            });
+          </script>
+        {% endif %}
+        
         <div class="heading-divider heading-divider--long"></div>
 
         <div class="typo-table">
@@ -416,12 +462,35 @@ id: id
               <span class="text">Add to cart</span> </button>
           </div>
           <div>
-            Font - {{ settings.button__font.family }}
+            Font - {{ settings.button__font.family }} <span class="button-font"> </span>
             <br>Style - {{ settings.button__font.style }}
             <br>Weight - {{ settings.button__font.weight }}
             <br>Size - {{ settings.regular_font_size }}
           </div>
         </div>
+
+        {% if section.settings.show-actual-font %}
+          <script>
+            document.addEventListener('DOMContentLoaded', function() {
+              var element = document.querySelector('.button');
+              var fontDisplayTarget = document.querySelector('.button-font');
+              
+              if (element && fontDisplayTarget) {
+                var fontFamily = window.getComputedStyle(element).fontFamily;
+                
+                // Extract the first font-family by splitting the string by commas
+                var firstFontFamily = fontFamily.split(',')[0].trim(); // Trim removes any extra spaces
+                
+                // Create a new span element to display the first font-family
+                var fontDisplay = document.createElement('span');
+                fontDisplay.textContent = ' -- Actual Font: ' + firstFontFamily; // Note the leading space
+                
+                // Append the new span element to the .heading1-font element
+                fontDisplayTarget.appendChild(fontDisplay);
+              }
+            });
+          </script>
+        {% endif %}
 
         <div class="heading-divider heading-divider--long"></div>
 
@@ -441,20 +510,43 @@ id: id
 
         <div class="typo-table">
           <div>
-        <h1>This is H1 text</h1>
+        <h1 class="heading1">This is H1 text</h1>
         <h2>This is H2 text</h2>
         <h3>This is H3 text</h3>
         <h4>This is H4 text</h4>
         <h5>This is H5 text</h5>
           </div>
           <div>
-            Font - {{ settings.heading__font.family }}
+            Shopify Font - {{ settings.heading__font.family }} <span class="heading1-font"></span>
             <br>Style - {{ settings.heading__font.style }}
             <br>Weight - {{ settings.heading__font.weight }}
             <br>Size - {{ settings.heading_size }}
                         <br>Color - {{ settings.heading_color }}
           </div>
         </div>    
+
+        {% if section.settings.show-actual-font %}
+          <script>
+            document.addEventListener('DOMContentLoaded', function() {
+              var element = document.querySelector('.heading1'); // Target the element with class "heading1"
+              var fontDisplayTarget = document.querySelector('.heading1-font'); // Target the element with class "heading1-font"
+              
+              if (element && fontDisplayTarget) {
+                var fontFamily = window.getComputedStyle(element).fontFamily;
+                
+                // Extract the first font-family by splitting the string by commas
+                var firstFontFamily = fontFamily.split(',')[0].trim(); // Trim removes any extra spaces
+                
+                // Create a new span element to display the first font-family
+                var fontDisplay = document.createElement('span');
+                fontDisplay.textContent = ' -- Actual Font: ' + firstFontFamily; // Note the leading space
+                
+                // Append the new span element to the .heading1-font element
+                fontDisplayTarget.appendChild(fontDisplay);
+              }
+            });
+          </script>
+        {% endif %}
         
         <div class="heading-divider heading-divider--long"></div>
         
@@ -477,13 +569,36 @@ id: id
             <p class="banner__heading">Banner Heading</p>
           </div>
           <div>
-            Font - {{ settings.banner_heading__font.family }}
+            Font - {{ settings.banner_heading__font.family }} <span class="banner__heading-font"></span>
             <br>Style - {{ settings.banner_heading__font.style }}
             <br>Weight - {{ settings.banner_heading__font.weight }}
             <br>Size - {{ settings.banner_heading_size }}
                         <br>Color - {{ settings.banner_heading_color }}
           </div>
-        </div>           
+        </div> 
+
+        {% if section.settings.show-actual-font %}
+          <script>
+            document.addEventListener('DOMContentLoaded', function() {
+              var element = document.querySelector('.banner__heading');
+              var fontDisplayTarget = document.querySelector('.banner__heading-font');
+              
+              if (element && fontDisplayTarget) {
+                var fontFamily = window.getComputedStyle(element).fontFamily;
+                
+                // Extract the first font-family by splitting the string by commas
+                var firstFontFamily = fontFamily.split(',')[0].trim(); // Trim removes any extra spaces
+                
+                // Create a new span element to display the first font-family
+                var fontDisplay = document.createElement('span');
+                fontDisplay.textContent = ' -- Actual Font: ' + firstFontFamily; // Note the leading space
+                
+                // Append the new span element to the .heading1-font element
+                fontDisplayTarget.appendChild(fontDisplay);
+              }
+            });
+          </script>
+        {% endif %}
         
         <div class="heading-divider heading-divider--long"></div>
         
@@ -653,6 +768,66 @@ id: id
 },
 {
 "type": "header",
+"content": "Logos"
+},
+{
+"type": "checkbox",
+"id": "show-logos",
+"label": "Show section",
+"default": false
+},
+{
+"type": "text",
+"id": "logo-font",
+"label": "Logo font"
+},
+{
+"type": "image_picker",
+"id": "logo-color",
+"label": "Color Logo"
+},
+{
+"type": "image_picker",
+"id": "logo-monochrome",
+"label": "Monochrome Logo"
+},
+{
+"type": "image_picker",
+"id": "logo-small",
+"label": "Small Logo"
+},
+{
+"type": "image_picker",
+"id": "logo-vertical",
+"label": "Vertical Logo"
+},
+{
+"type": "image_picker",
+"id": "logo-inverse",
+"label": "Inverse Logo"
+},
+{
+"type": "image_picker",
+"id": "logo-icon",
+"label": "Icon Logo"
+},
+{
+"type": "header",
+"content": "Typography"
+},
+{
+"type": "checkbox",
+"id": "show-actual-font",
+"label": "Show actual font",
+"default": false
+},
+{
+"type": "textarea",
+"id": "typography",
+"label": "Explanation"
+},
+{
+"type": "header",
 "content": "Brand Framework"
 },
 {
@@ -735,60 +910,6 @@ id: id
 "id": "show-shopify-brand-settings",
 "label": "Show Shopify brand settings",
 "default": false
-},
-{
-"type": "header",
-"content": "Logos"
-},
-{
-"type": "checkbox",
-"id": "show-logos",
-"label": "Show section",
-"default": false
-},
-{
-"type": "text",
-"id": "logo-font",
-"label": "Logo font"
-},
-{
-"type": "image_picker",
-"id": "logo-color",
-"label": "Color Logo"
-},
-{
-"type": "image_picker",
-"id": "logo-monochrome",
-"label": "Monochrome Logo"
-},
-{
-"type": "image_picker",
-"id": "logo-small",
-"label": "Small Logo"
-},
-{
-"type": "image_picker",
-"id": "logo-vertical",
-"label": "Vertical Logo"
-},
-{
-"type": "image_picker",
-"id": "logo-inverse",
-"label": "Inverse Logo"
-},
-{
-"type": "image_picker",
-"id": "logo-icon",
-"label": "Icon Logo"
-},
-{
-"type": "header",
-"content": "Typography"
-},
-{
-"type": "textarea",
-"id": "typography",
-"label": "Explanation"
 },
 {
 "type": "header",
