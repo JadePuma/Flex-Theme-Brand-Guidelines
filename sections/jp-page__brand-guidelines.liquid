@@ -1,9 +1,7 @@
 {% comment %}
-
   Custom section created by JadePuma
   Instructions - https://jadepuma.com/blogs/shopify-tutorials/brand-guidelines-section-for-the-flex-theme
-  Last editted - 12Sep24
-
+  Last editted - 6Oct24
 {% endcomment %}
 
 {%- assign id = section.id -%}
@@ -86,30 +84,29 @@ margin: 0 auto;
 {%- endcapture -%}
 
 {% style %}
-#shopify-section-{{ id }} {
-padding-top: {{ section.settings.padding_top }}px;
-padding-bottom: {{ section.settings.padding_bottom }}px;
-padding-left: {{ section.settings.padding_left }}px;
-padding-right: {{ section.settings.padding_right }}px;
-{% if section.settings.width == 'wide' %}
-width: 100%;
-{% elsif section.settings.width == 'half' %}
-width: 50%;
-{% endif %}
-}
+  #shopify-section-{{ id }} {
+  padding-top: {{ section.settings.padding_top }}px;
+  padding-bottom: {{ section.settings.padding_bottom }}px;
+  padding-left: {{ section.settings.padding_left }}px;
+  padding-right: {{ section.settings.padding_right }}px;
+  {% if section.settings.width == 'wide' %}
+  width: 100%;
+  {% elsif section.settings.width == 'half' %}
+  width: 50%;
+  {% endif %}
+  }
 
-{%
-    render 'css-loop',
-css: section_css,
-id: id
-%}
+  {%
+      render 'css-loop',
+  css: section_css,
+  id: id
+  %}
 
-{%
-    render 'css-loop',
-css: section.settings.custom_css,
-id: id
-%}
-
+  {%
+      render 'css-loop',
+  css: section.settings.custom_css,
+  id: id
+  %}
 {% endstyle %}
 
 {% assign icon-blocks = 0 %}
@@ -122,238 +119,254 @@ id: id
   {% for block in section.blocks %}
     {% if block.type == 'iconography-image' %}
       {% assign icon-blocks = icon-blocks | plus: 1 %}
-      {% elsif block.type == "brand-image" %}
+    {% elsif block.type == 'brand-image' %}
       {% assign brand-blocks = brand-blocks | plus: 1 %}
-      {% elsif block.type == "mood-image" %}
+    {% elsif block.type == 'mood-image' %}
       {% assign mood-blocks = mood-blocks | plus: 1 %}
-      {% elsif block.type == "pattern-image" %}
+    {% elsif block.type == 'pattern-image' %}
       {% assign pattern-blocks = pattern-blocks | plus: 1 %}
-      {% elsif block.type == "color" %}
+    {% elsif block.type == 'color' %}
       {% assign color-blocks = color-blocks | plus: 1 %}
     {% endif %}
   {% endfor %}
 {% endif %}
 
 {% comment %} HTML markup {% endcomment %}
-<section class="featured-video
-                section
-                {{ section.settings.css_class }}
-                is-width-{{ section.settings.width }}
-                {% if section.settings.mobile_text_below_video == true %}
-                mobile-text--below-media
-                {% else %}
-                mobile-text--over-media
-                {% endif %}
-                {% if video_exists %} has-video-added {% endif %}
-                video-controls-enabled--{{ section.settings.controls }}"
-         {% if section.settings.animation != "none" %}
-         data-scroll-class="{{ section.settings.animation }}"
-         {% endif %}>
-  <div class="container
-              video__container
-              {% if section.settings.width == 'wide' or section.settings.width == 'half' %}
-              equal-columns--outside-trim
-              {% endif %}">
+<section
+  class="
+    featured-video
+    section
+    {{ section.settings.css_class }}
+    is-width-{{ section.settings.width }}
+    {% if section.settings.mobile_text_below_video == true %}
+    mobile-text--below-media
+    {% else %}
+    mobile-text--over-media
+    {% endif %}
+    {% if video_exists %} has-video-added {% endif %}
+    video-controls-enabled--{{ section.settings.controls }}
+  "
+  {% if section.settings.animation != 'none' %}
+    data-scroll-class="{{ section.settings.animation }}"
+  {% endif %}
+>
+  <div
+    class="
+      container
+      video__container
+      {% if section.settings.width == 'wide' or section.settings.width == 'half' %}
+      equal-columns--outside-trim
+      {% endif %}
+    "
+  >
     <div class="one-whole column content">
-
-      {% comment %} {% render 'heading',
-              title: page.title,
-      heading_tag: 'h1',
-      context: 'page',
-      text_alignment: section.settings.heading_alignment
-      %} {% endcomment %}
+      {% comment %}
+        {% render 'heading',
+                title: page.title,
+        heading_tag: 'h1',
+        context: 'page',
+        text_alignment: section.settings.heading_alignment
+        %}
+      {% endcomment %}
 
       <div class="brand-guidelines">
-
-        {% if section.settings.show-framework %}
-        <h2 class="section-heading">Brand Framework</h2>
-        {% if section.settings.mission-statement != blank %}
-          <h3>Mission Statement</h3>
-          <p>{{ section.settings.mission-statement }}</p>
-        {% endif %}
-        {% if section.settings.vision-statement != blank %}
-          <h3>Vision Statement</h3>
-          <p>{{ section.settings.vision-statement }}</p>
-        {% endif %}
-        {% if section.settings.usp != blank %}
-          <h3>Unique Selling Propostion (USP)</h3>
-          <p>{{ section.settings.usp }}</p>
-        {% endif %}
-        {% if section.settings.value-propostion != blank %}
-          <h3>Value Proposition</h3>
-          <p>{{ section.settings.value-propostion }}</p>
-        {% endif %}
-        {% endif %}          
-
-        {% if section.settings.show-mission %}
-        <h2 class="section-heading">Brand Story</h2>
-        {% if section.settings.about-brand != blank %}
-          <h3>About the Brand</h3>
-          <p>{{ section.settings.about-brand }}</p>
-        {% endif %}
-        {% if section.settings.about-product != blank %}
-          <h3>About the Product</h3>
-          <p>{{ section.settings.about-product }}</p>
-        {% endif %}
-        {% if section.settings.product-why != blank %}
-          <h3>Higher Level Benefits</h3>
-          <p>{{ section.settings.product-why }}</p>
-        {% endif %}
-        {% if section.settings.about-differentiator != blank %}
-          <h3>Brand Differentiator</h3>
-          <p>{{ section.settings.about-differentiator }}</p>
-        {% endif %}
-        {% if section.settings.target-audience != blank %}
-          <h3>Target Audience</h3>
-          <p>{{ section.settings.target-audience }}</p>
-        {% endif %}
-        {% if section.settings.mission != blank %}
-          <h3>Mission</h3>
-          <p>{{ section.settings.mission }}</p>
-        {% endif %}
-        {% if section.settings.tone-personality != blank %}
-          <h3>Tone / Personality</h3>
-          <p>{{ section.settings.tone-personality }}</p>
-        {% endif %}
-        {% endif %}              
-
-        {% if section.settings.show-logos %}
-        <div class="logos">
-          <h2 class="section-heading">Logos</h2>
-
-          {% if section.settings.logo-color %}
-          {%- assign image = section.settings.logo-color -%}
-          <h3>Color Logo </h3>
-          {% render 'image-element', image: image, alt: 'Color Logo' %}      
-          <div class="heading-divider heading-divider--long"></div>
+        {% if section.settings['show-framework'] %}
+          <h2 class="section-heading">Brand Framework</h2>
+          {% if section.settings['mission-statement'] != blank %}
+            <h3>Mission Statement</h3>
+            <p>{{ section.settings['mission-statement'] }}</p>
           {% endif %}
-
-          {% if section.settings.logo-monochrome %}
-          {%- assign image = section.settings.logo-monochrome -%}
-          <h3>Monochrome Logo </h3>
-          {% render 'image-element', image: image, alt: 'Monochrome Logo' %} 
-          <div class="heading-divider heading-divider--long"></div>
+          {% if section.settings['vision-statement'] != blank %}
+            <h3>Vision Statement</h3>
+            <p>{{ section.settings['vision-statement'] }}</p>
           {% endif %}
-
-          {% if section.settings.logo-small %}
-          {%- assign image = section.settings.logo-small -%}
-          <h3>Small Logo </h3>
-          {% render 'image-element', image: image, alt: 'Small Logo' %}    
-          <div class="heading-divider heading-divider--long"></div>
+          {% if section.settings.usp != blank %}
+            <h3>Unique Selling Propostion (USP)</h3>
+            <p>{{ section.settings.usp }}</p>
           {% endif %}
-
-          {% if section.settings.logo-vertical %}
-          {%- assign image = section.settings.logo-vertical -%}
-          <h3>Vertical Logo </h3>
-          {% render 'image-element', image: image, alt: 'Vertical Logo' %}   
-          <div class="heading-divider heading-divider--long"></div>
+          {% if section.settings['value-propostion'] != blank %}
+            <h3>Value Proposition</h3>
+            <p>{{ section.settings['value-propostion'] }}</p>
           {% endif %}
+        {% endif %}
 
-          {% if section.settings.logo-inverse %}
-          {%- assign image = section.settings.logo-inverse -%}
-          <h3>Inverse Logo </h3>
-          <div class="inverse">
-            {% render 'image-element', image: image, alt: 'Inverse Logo' %}  
+        {% if section.settings['show-mission'] %}
+          <h2 class="section-heading">Brand Story</h2>
+          {% if section.settings['about-brand'] != blank %}
+            <h3>About the Brand</h3>
+            <p>{{ section.settings['about-brand'] }}</p>
+          {% endif %}
+          {% if section.settings['about-product'] != blank %}
+            <h3>About the Product</h3>
+            <p>{{ section.settings['about-product'] }}</p>
+          {% endif %}
+          {% if section.settings['product-why'] != blank %}
+            <h3>Higher Level Benefits</h3>
+            <p>{{ section.settings['product-why'] }}</p>
+          {% endif %}
+          {% if section.settings['about-differentiator'] != blank %}
+            <h3>Brand Differentiator</h3>
+            <p>{{ section.settings['about-differentiator'] }}</p>
+          {% endif %}
+          {% if section.settings['target-audience'] != blank %}
+            <h3>Target Audience</h3>
+            <p>{{ section.settings['target-audience'] }}</p>
+          {% endif %}
+          {% if section.settings.mission != blank %}
+            <h3>Mission</h3>
+            <p>{{ section.settings.mission }}</p>
+          {% endif %}
+          {% if section.settings['tone-personality'] != blank %}
+            <h3>Tone / Personality</h3>
+            <p>{{ section.settings['tone-personality'] }}</p>
+          {% endif %}
+        {% endif %}
+
+        {% if section.settings['show-logos'] %}
+          <div class="logos">
+            <h2 class="section-heading">Logos</h2>
+
+            {% if section.settings['logo-color'] %}
+              {%- assign image = section.settings['logo-color'] -%}
+              <h3>Color Logo</h3>
+              {% render 'image-element', image: image, alt: 'Color Logo' %}
+              <div class="heading-divider heading-divider--long"></div>
+            {% endif %}
+
+            {% if section.settings['logo-monochrome'] %}
+              {%- assign image = section.settings['logo-monochrome'] -%}
+              <h3>Monochrome Logo</h3>
+              {% render 'image-element', image: image, alt: 'Monochrome Logo' %}
+              <div class="heading-divider heading-divider--long"></div>
+            {% endif %}
+
+            {% if section.settings['logo-small'] %}
+              {%- assign image = section.settings['logo-small'] -%}
+              <h3>Small Logo</h3>
+              {% render 'image-element', image: image, alt: 'Small Logo' %}
+              <div class="heading-divider heading-divider--long"></div>
+            {% endif %}
+
+            {% if section.settings['logo-vertical'] %}
+              {%- assign image = section.settings['logo-vertical'] -%}
+              <h3>Vertical Logo</h3>
+              {% render 'image-element', image: image, alt: 'Vertical Logo' %}
+              <div class="heading-divider heading-divider--long"></div>
+            {% endif %}
+
+            {% if section.settings['logo-inverse'] %}
+              {%- assign image = section.settings['logo-inverse'] -%}
+              <h3>Inverse Logo</h3>
+              <div class="inverse">
+                {% render 'image-element', image: image, alt: 'Inverse Logo' %}
+              </div>
+              <div class="heading-divider heading-divider--long"></div>
+            {% endif %}
+
+            {% if section.settings['logo-icon'] %}
+              {%- assign image = section.settings['logo-icon'] -%}
+              <h3>Icon Logo</h3>
+              {% render 'image-element', image: image, alt: 'icon Logo' %}
+              <div class="heading-divider heading-divider--long"></div>
+            {% endif %}
+
+            {% if section.settings['logo-font'] != '' %}
+              <p>Logo Font - {{ section.settings['logo-font'] }}</p>
+            {% endif %}
           </div>
-          <div class="heading-divider heading-divider--long"></div>
-          {% endif %}
-
-          {% if section.settings.logo-icon %}
-          {%- assign image = section.settings.logo-icon -%}
-          <h3>Icon Logo </h3>
-          {% render 'image-element', image: image, alt: 'icon Logo' %}    
-          <div class="heading-divider heading-divider--long"></div>
-          {% endif %}
-
-          {% if section.settings.logo-font != "" %}
-          <p>Logo Font - {{ section.settings.logo-font }}</p>
-          {% endif %}     
-
-        </div>
         {% endif %}
 
         <h2 class="section-heading">Color Palette</h2>
-        
+
         {% if color-blocks > 0 %}
-        <div class="color-array">
-          <div>Lightest</div>
-          <div>Lighter</div>
-          <div>Main</div>
-          <div>Darker</div>
-          <div>Darkest</div>
-        {% for block in section.blocks %}
-        {% if block.type == 'color' %}
-        <div class="color-swatch" style="background-color: {{ block.settings.color-lightest }}"></div>
-        <div class="color-swatch" style="background-color: {{ block.settings.color-lighter }}"></div>
-        <div class="color-swatch" style="background-color: {{ block.settings.color }}"></div>
-        <div class="color-swatch" style="background-color: {{ block.settings.color-darker }}"></div>
-        <div class="color-swatch" style="background-color: {{ block.settings.color-darkest }}"></div>
-          {% assign lightest = block.settings.color-lightest | remove: "#" %}
-        <div><a href="https://www.colorhexa.com/{{ lightest }}" target="_blank">{{ block.settings.color-lightest }}</a></div>
-          {% assign lighter = block.settings.color-lighter | remove: "#" %}
-          <div><a href="https://www.colorhexa.com/{{ lighter }}" target="_blank">{{ block.settings.color-lighter }}</a></div>
-          {% assign color = block.settings.color | remove: "#" %}
-          <div><a href="https://www.colorhexa.com/{{ color }}" target="_blank">{{ block.settings.color }}</a></div>
-          {% assign darker = block.settings.color-darker | remove: "#" %}
-          <div><a href="https://www.colorhexa.com/{{ darker }}" target="_blank">{{ block.settings.color-darker }}</a></div>
-          {% assign darkest = block.settings.color-darkest | remove: "#" %}
-          <div><a href="https://www.colorhexa.com/{{ darkest }}" target="_blank">{{ block.settings.color-darkest }}</a></div>
-        {% endif %}
-        {% endfor %} 
-        </div>
+          <div class="color-array">
+            <div>Lightest</div>
+            <div>Lighter</div>
+            <div>Main</div>
+            <div>Darker</div>
+            <div>Darkest</div>
+            {% for block in section.blocks %}
+              {% if block.type == 'color' %}
+                <div class="color-swatch" style="background-color: {{ block.settings.color-lightest }}"></div>
+                <div class="color-swatch" style="background-color: {{ block.settings.color-lighter }}"></div>
+                <div class="color-swatch" style="background-color: {{ block.settings.color }}"></div>
+                <div class="color-swatch" style="background-color: {{ block.settings.color-darker }}"></div>
+                <div class="color-swatch" style="background-color: {{ block.settings.color-darkest }}"></div>
+                {% assign lightest = block.settings['color-lightest'] | remove: '#' %}
+                <div>
+                  <a href="https://www.colorhexa.com/{{ lightest }}" target="_blank">
+                    {{- block.settings['color-lightest'] -}}
+                  </a>
+                </div>
+                {% assign lighter = block.settings['color-lighter'] | remove: '#' %}
+                <div>
+                  <a href="https://www.colorhexa.com/{{ lighter }}" target="_blank">
+                    {{- block.settings['color-lighter'] -}}
+                  </a>
+                </div>
+                {% assign color = block.settings.color | remove: '#' %}
+                <div>
+                  <a href="https://www.colorhexa.com/{{ color }}" target="_blank">{{ block.settings.color }}</a>
+                </div>
+                {% assign darker = block.settings['color-darker'] | remove: '#' %}
+                <div>
+                  <a href="https://www.colorhexa.com/{{ darker }}" target="_blank">
+                    {{- block.settings['color-darker'] -}}
+                  </a>
+                </div>
+                {% assign darkest = block.settings['color-darkest'] | remove: '#' %}
+                <div>
+                  <a href="https://www.colorhexa.com/{{ darkest }}" target="_blank">
+                    {{- block.settings['color-darkest'] -}}
+                  </a>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
         {% endif %}
 
         <h3>Theme Color Settings</h3>
         <div class="color-palette">
-          
-        <div>Background</div>
-        <div class="color-swatch" style="background-color: {{ settings.shop_bg_color }}"></div>
+          <div>Background</div>
+          <div class="color-swatch" style="background-color: {{ settings.shop_bg_color }}"></div>
           <div>{{ settings.shop_bg_color }}</div>
-          
-        <div>Borders</div>
-        <div class="color-swatch" style="background-color: {{ settings.border_color }}"></div>
+
+          <div>Borders</div>
+          <div class="color-swatch" style="background-color: {{ settings.border_color }}"></div>
           <div>{{ settings.border_color }}</div>
- 
-        <div>Heading Divider</div>
-        <div class="color-swatch" style="background-color: {{ settings.divider_color }}"></div>
+
+          <div>Heading Divider</div>
+          <div class="color-swatch" style="background-color: {{ settings.divider_color }}"></div>
           <div>{{ settings.divider_color }}</div>
-          
-         <div>Header Background</div>
-        <div class="color-swatch" style="background-color: {{ settings.header_background }}"></div>
-          <div>{{ settings.header_background }}</div>         
-          
-        <div>Cart Badge</div>
-        <div class="color-swatch" style="background-color: {{ settings.header_cart_badge_color }}"></div>
-          <div>{{ settings.header_cart_badge_color }}</div>          
-          
-        <div>Cart Background</div>
-        <div class="color-swatch" style="background-color: {{ settings.cart_background_color }}"></div>
-          <div>{{ settings.cart_background_color }}</div>          
-          
-        <div>Dropdown Background</div>
-        <div class="color-swatch" style="background-color: {{ settings.dropdown_background }}"></div>
+
+          <div>Header Background</div>
+          <div class="color-swatch" style="background-color: {{ settings.header_background }}"></div>
+          <div>{{ settings.header_background }}</div>
+
+          <div>Cart Badge</div>
+          <div class="color-swatch" style="background-color: {{ settings.header_cart_badge_color }}"></div>
+          <div>{{ settings.header_cart_badge_color }}</div>
+
+          <div>Cart Background</div>
+          <div class="color-swatch" style="background-color: {{ settings.cart_background_color }}"></div>
+          <div>{{ settings.cart_background_color }}</div>
+
+          <div>Dropdown Background</div>
+          <div class="color-swatch" style="background-color: {{ settings.dropdown_background }}"></div>
           <div>{{ settings.dropdown_background }}</div>
-          
-         <div>Footer Background</div>
-        <div class="color-swatch" style="background-color: {{ settings.footer_background }}"></div>
-          <div>{{ settings.footer_background }}</div>         
-          
-        <div>Footer Border</div>
-        <div class="color-swatch" style="background-color: {{ settings.footer_border }}"></div>
-          <div>{{ settings.footer_border }}</div>          
-          
-        <div>Borders</div>
-        <div class="color-swatch" style="background-color: {{ settings.border_color }}"></div>
-          <div>{{ settings.border_color }}</div>          
-          
-        <div>Borders</div>
-        <div class="color-swatch" style="background-color: {{ settings.border_color }}"></div>
-        <div>{{ settings.border_color }}</div>          
-          
-        </div>      
+
+          <div>Footer Background</div>
+          <div class="color-swatch" style="background-color: {{ settings.footer_background }}"></div>
+          <div>{{ settings.footer_background }}</div>
+
+          <div>Footer Border</div>
+          <div class="color-swatch" style="background-color: {{ settings.footer_border }}"></div>
+          <div>{{ settings.footer_border }}</div>
+
+        </div>
 
         <h2 class="section-heading">Typography</h2>
-        
+
         <p>{{ section.settings.typography }}</p>
 
         <div class="typo-table">
@@ -361,130 +374,153 @@ id: id
             <p class="body-text">This is body text</p>
           </div>
           <div>
-            Font - {{ settings.regular__font.family }} <span class="body-text-font"> </span>
-            <br>Style - {{ settings.regular__font.style }}
-            <br>Weight - {{ settings.regular__font.weight }}
-            <br>Size - {{ settings.regular_font_size }}
-            <br>Color - {{ settings.regular_color }}
+            Font - {{ settings.regular__font.family }}
+            <span class="body-text-font"> </span> <br>
+            Style - {{ settings.regular__font.style }}
+            <br>
+            Weight - {{ settings.regular__font.weight }}
+            <br>
+            Size - {{ settings.regular_font_size }}
+            <br>
+            Color - {{ settings.regular_color }}
           </div>
         </div>
 
-        {% if section.settings.show-actual-font %}
+        {% if section.settings['show-actual-font'] %}
           <script>
             document.addEventListener('DOMContentLoaded', function() {
               var element = document.querySelector('.body-text');
               var fontDisplayTarget = document.querySelector('.body-text-font');
-              
+
               if (element && fontDisplayTarget) {
                 var fontFamily = window.getComputedStyle(element).fontFamily;
-                
+
                 // Extract the first font-family by splitting the string by commas
                 var firstFontFamily = fontFamily.split(',')[0].trim(); // Trim removes any extra spaces
-                
+
                 // Create a new span element to display the first font-family
                 var fontDisplay = document.createElement('span');
                 fontDisplay.textContent = ' -- Actual Font: ' + firstFontFamily; // Note the leading space
-                
+
                 // Append the new span element to the .heading1-font element
                 fontDisplayTarget.appendChild(fontDisplay);
               }
             });
           </script>
         {% endif %}
-        
+
         <div class="heading-divider heading-divider--long"></div>
-        
+
         <div class="typo-table">
-          <div>    
+          <div>
             <div class="header">
               <div class="header__menu is-justify-center">
-                <nav class="header__menu-items is-flex is-flex-wrap is-justify-center header__dropdown--below-parent" role="navigation" aria-label="main navigation"> 
-                  <div class="navbar-item header__item" data-navlink-handle="our-services"> 
-                    <label for="mega-our-services"> 
+                <nav
+                  class="header__menu-items is-flex is-flex-wrap is-justify-center header__dropdown--below-parent"
+                  role="navigation"
+                  aria-label="main navigation"
+                >
+                  <div class="navbar-item header__item" data-navlink-handle="our-services">
+                    <label for="mega-our-services">
                       <a href="#" class="navbar-link header__link  is-arrowless">Menu Item</a>
                     </label>
-                  </div> 
-                </nav>  
+                  </div>
+                </nav>
               </div>
             </div>
           </div>
           <div>
-            Font - {{ settings.nav__font.family }} <span class="navbar-link-font"> </span>
-            <br>Style - {{ settings.nav__font.style }}
-            <br>Weight - {{ settings.nav__font.weight }}
-            <br>Size - {{ settings.nav_font_size }}
-            <br>Color - {{ settings.header_link_color }}
+            Font - {{ settings.nav__font.family }}
+            <span class="navbar-link-font"> </span> <br>
+            Style - {{ settings.nav__font.style }}
+            <br>
+            Weight - {{ settings.nav__font.weight }}
+            <br>
+            Size - {{ settings.nav_font_size }}
+            <br>
+            Color - {{ settings.header_link_color }}
           </div>
-        </div>    
+        </div>
 
-        {% if section.settings.show-actual-font %}
+        {% if section.settings['show-actual-font'] %}
           <script>
             document.addEventListener('DOMContentLoaded', function() {
               var element = document.querySelector('.navbar-link');
               var fontDisplayTarget = document.querySelector('.navbar-link-font');
-              
+
               if (element && fontDisplayTarget) {
                 var fontFamily = window.getComputedStyle(element).fontFamily;
-                
+
                 // Extract the first font-family by splitting the string by commas
                 var firstFontFamily = fontFamily.split(',')[0].trim(); // Trim removes any extra spaces
-                
+
                 // Create a new span element to display the first font-family
                 var fontDisplay = document.createElement('span');
                 fontDisplay.textContent = ' -- Actual Font: ' + firstFontFamily; // Note the leading space
-                
+
                 // Append the new span element to the .heading1-font element
                 fontDisplayTarget.appendChild(fontDisplay);
               }
             });
           </script>
         {% endif %}
-        
+
         <div class="heading-divider heading-divider--long"></div>
 
         <div class="typo-table">
           <div>
-      <div class="buttons is-center">
-      <a href="#">Text Link</a>
-      </div>
+            <div class="buttons is-center">
+              <a href="#">Text Link</a>
+            </div>
           </div>
           <div>
             Color - {{ settings.link_color }}
-            <br>Hover Color - {{ settings.link_hover_color }}
+            <br>
+            Hover Color - {{ settings.link_hover_color }}
           </div>
         </div>
 
         <div class="typo-table">
           <div>
-      <div class="buttons is-center"> <a href="#" class="button button--primary ">Primary Button</a></div>
-            <div class="buttons is-center"> <a href="#" class="button button--secondary ">Secondary Button</a></div>
-            <button type="submit" name="add" class="button action_button button--add-to-cart action_button--primary" data-label="Add to cart" data-add-to-cart-trigger=""> 
-              <span class="text">Add to cart</span> </button>
+            <div class="buttons is-center"><a href="#" class="button button--primary ">Primary Button</a></div>
+            <div class="buttons is-center"><a href="#" class="button button--secondary ">Secondary Button</a></div>
+            <button
+              type="submit"
+              name="add"
+              class="button action_button button--add-to-cart action_button--primary"
+              data-label="Add to cart"
+              data-add-to-cart-trigger=""
+            >
+              <span class="text">Add to cart</span>
+            </button>
           </div>
           <div>
-            Font - {{ settings.button__font.family }} <span class="button-font"> </span>
-            <br>Style - {{ settings.button__font.style }}
-            <br>Weight - {{ settings.button__font.weight }}
-            <br>Size - {{ settings.regular_font_size }}
+            Font - {{ settings.button__font.family }}
+            <span class="button-font"> </span> <br>
+            Style - {{ settings.button__font.style }}
+            <br>
+            Weight - {{ settings.button__font.weight }}
+            <br>
+            Size - {{ settings.regular_font_size }}
           </div>
         </div>
 
-        {% if section.settings.show-actual-font %}
+        {% if section.settings['show-actual-font'] %}
           <script>
             document.addEventListener('DOMContentLoaded', function() {
               var element = document.querySelector('.button');
               var fontDisplayTarget = document.querySelector('.button-font');
-              
+
               if (element && fontDisplayTarget) {
                 var fontFamily = window.getComputedStyle(element).fontFamily;
-                
+
                 // Extract the first font-family by splitting the string by commas
                 var firstFontFamily = fontFamily.split(',')[0].trim(); // Trim removes any extra spaces
-                
+
                 // Create a new span element to display the first font-family
                 var fontDisplay = document.createElement('span');
                 fontDisplay.textContent = ' -- Actual Font: ' + firstFontFamily; // Note the leading space
-                
+
                 // Append the new span element to the .heading1-font element
                 fontDisplayTarget.appendChild(fontDisplay);
               }
@@ -500,247 +536,325 @@ id: id
           </div>
           <div>
             Font - {{ settings.preheading_font.family }}
-            <br>Style - {{ settings.preheading_font.style }}
-            <br>Weight - {{ settings.preheading_font.weight }}
-            <br>Size - {{ settings.preheading_size }}
+            <br>
+            Style - {{ settings.preheading_font.style }}
+            <br>
+            Weight - {{ settings.preheading_font.weight }}
+            <br>
+            Size - {{ settings.preheading_size }}
           </div>
-        </div>  
-        
+        </div>
+
         <div class="heading-divider heading-divider--long"></div>
 
-        <div class="typo-table">
-          <div>
-        <h1 class="heading1">This is H1 text</h1>
-        <h2>This is H2 text</h2>
-        <h3>This is H3 text</h3>
-        <h4>This is H4 text</h4>
-        <h5>This is H5 text</h5>
-          </div>
-          <div>
-            Shopify Font - {{ settings.heading__font.family }} <span class="heading1-font"></span>
-            <br>Style - {{ settings.heading__font.style }}
-            <br>Weight - {{ settings.heading__font.weight }}
-            <br>Size - {{ settings.heading_size }}
-                        <br>Color - {{ settings.heading_color }}
-          </div>
-        </div>    
+<div class="typo-table">
+  <div>
+    <h1 class="heading1">This is H1 text</h1>
+  </div>
+  <div class="heading1settings"></div>
+</div>
 
-        {% if section.settings.show-actual-font %}
-          <script>
-            document.addEventListener('DOMContentLoaded', function() {
-              var element = document.querySelector('.heading1'); // Target the element with class "heading1"
-              var fontDisplayTarget = document.querySelector('.heading1-font'); // Target the element with class "heading1-font"
-              
-              if (element && fontDisplayTarget) {
-                var fontFamily = window.getComputedStyle(element).fontFamily;
-                
-                // Extract the first font-family by splitting the string by commas
-                var firstFontFamily = fontFamily.split(',')[0].trim(); // Trim removes any extra spaces
-                
-                // Create a new span element to display the first font-family
-                var fontDisplay = document.createElement('span');
-                fontDisplay.textContent = ' -- Actual Font: ' + firstFontFamily; // Note the leading space
-                
-                // Append the new span element to the .heading1-font element
-                fontDisplayTarget.appendChild(fontDisplay);
-              }
-            });
-          </script>
-        {% endif %}
-        
+<div class="typo-table">
+  <div>
+    <h2 class="heading2">This is H2 text</h2>
+  </div>
+  <div class="heading2settings"></div>
+</div>
+
+<div class="typo-table">
+  <div>
+    <h3 class="heading3">This is H3 text</h3>
+  </div>
+  <div class="heading3settings"></div>
+</div>
+
+<div class="typo-table">
+  <div>
+    <h4 class="heading4">This is H4 text</h4>
+  </div>
+  <div class="heading4settings"></div>
+</div>
+
+<div class="typo-table">
+  <div>
+    <h5 class="heading5">This is H5 text</h5>
+  </div>
+  <div class="heading5settings"></div>
+</div>
+
+<script>
+  // Define an array of heading levels and corresponding class suffixes
+  const headingLevels = [1, 2, 3, 4, 5];
+
+  headingLevels.forEach((level) => {
+    // Construct class names dynamically
+    const headingClass = `heading${level}`;
+    const settingsClass = `heading${level}settings`;
+
+    // Select the elements
+    const headingElement = document.querySelector(`.${headingClass}`);
+    const settingsElement = document.querySelector(`.${settingsClass}`);
+
+    if (headingElement && settingsElement) {
+      // Get the computed styles of the element
+      const styles = window.getComputedStyle(headingElement);
+
+      // Extract the desired properties
+      const cssProperties = {
+        'font-family': styles.getPropertyValue('font-family'),
+        'font-style': styles.getPropertyValue('font-style'),
+        'font-weight': styles.getPropertyValue('font-weight'),
+        'font-size': styles.getPropertyValue('font-size'),
+        'color': rgbToHex(styles.getPropertyValue('color'))
+      };
+
+      // Create a formatted string of the desired properties
+      let cssText = '';
+      for (const [property, value] of Object.entries(cssProperties)) {
+        cssText += `${property}: ${value};\n`;
+      }
+
+      // Display the CSS properties inside the settings element
+      settingsElement.style.whiteSpace = 'pre'; // Preserve new lines in CSS properties
+      settingsElement.style.padding = '10px';
+      settingsElement.textContent = cssText;
+    } else {
+      console.log(`Element with class "${headingClass}" or "${settingsClass}" not found on this page.`);
+    }
+  });
+
+  // Helper function to convert RGB color to HEX format
+  function rgbToHex(rgb) {
+    // Extract the rgb values using regex
+    const rgbValues = rgb.match(/\d+/g);
+    if (rgbValues && rgbValues.length >= 3) {
+      return (
+        '#' +
+        rgbValues
+          .slice(0, 3) // Take the first three values (r, g, b)
+          .map((num) => parseInt(num).toString(16).padStart(2, '0')) // Convert to hex and pad
+          .join('')
+      );
+    }
+    return rgb; // Fallback to the original value if conversion fails
+  }
+</script>
+
+
         <div class="heading-divider heading-divider--long"></div>
-        
+
         <div class="typo-table">
           <div>
             <p class="heading-section__subheading">Sub-Heading</p>
           </div>
           <div>
             Font - {{ settings.subheading_font.family }}
-            <br>Style - {{ settings.subheading_font.style }}
-            <br>Weight - {{ settings.subheading_font.weight }}
-            <br>Size - {{ settings.subheading_size }}
+            <br>
+            Style - {{ settings.subheading_font.style }}
+            <br>
+            Weight - {{ settings.subheading_font.weight }}
+            <br>
+            Size - {{ settings.subheading_size }}
           </div>
-        </div>          
-        
+        </div>
+
         <div class="heading-divider heading-divider--long"></div>
-        
+
         <div class="typo-table">
           <div>
             <p class="banner__heading">Banner Heading</p>
           </div>
           <div>
-            Font - {{ settings.banner_heading__font.family }} <span class="banner__heading-font"></span>
-            <br>Style - {{ settings.banner_heading__font.style }}
-            <br>Weight - {{ settings.banner_heading__font.weight }}
-            <br>Size - {{ settings.banner_heading_size }}
-                        <br>Color - {{ settings.banner_heading_color }}
+            Font - {{ settings.banner_heading__font.family }}
+            <span class="banner__heading-font"></span> <br>
+            Style - {{ settings.banner_heading__font.style }}
+            <br>
+            Weight - {{ settings.banner_heading__font.weight }}
+            <br>
+            Size - {{ settings.banner_heading_size }}
+            <br>
+            Color - {{ settings.banner_heading_color }}
           </div>
-        </div> 
+        </div>
 
-        {% if section.settings.show-actual-font %}
+        {% if section.settings['show-actual-font'] %}
           <script>
             document.addEventListener('DOMContentLoaded', function() {
               var element = document.querySelector('.banner__heading');
               var fontDisplayTarget = document.querySelector('.banner__heading-font');
-              
+
               if (element && fontDisplayTarget) {
                 var fontFamily = window.getComputedStyle(element).fontFamily;
-                
+
                 // Extract the first font-family by splitting the string by commas
                 var firstFontFamily = fontFamily.split(',')[0].trim(); // Trim removes any extra spaces
-                
+
                 // Create a new span element to display the first font-family
                 var fontDisplay = document.createElement('span');
                 fontDisplay.textContent = ' -- Actual Font: ' + firstFontFamily; // Note the leading space
-                
+
                 // Append the new span element to the .heading1-font element
                 fontDisplayTarget.appendChild(fontDisplay);
               }
             });
           </script>
         {% endif %}
-        
+
         <div class="heading-divider heading-divider--long"></div>
-        
+
         <div class="typo-table">
           <div>
             <p class="banner__subheading">This is Banner Text</p>
           </div>
           <div>
             Font - {{ settings.banner_text__font.family }}
-            <br>Style - {{ settings.banner_text__font.style }}
-            <br>Weight - {{ settings.banner_text__font.weight }}
-            <br>Size - {{ settings.banner_text_size }}
+            <br>
+            Style - {{ settings.banner_text__font.style }}
+            <br>
+            Weight - {{ settings.banner_text__font.weight }}
+            <br>
+            Size - {{ settings.banner_text_size }}
           </div>
-        </div>   
-        
-        {% if section.settings.show-brand-imagery %}
-        <h2 class="section-heading">Brand Imagery</h2>
-        <p>{{ section.settings.brand-imagery }}</p>
-        {% if brand-blocks > 0 %}
-        {% for block in section.blocks %}
-        {% if block.type == 'brand-image' %}
-        {% assign image = block.settings.brand-image %}
-        {% render 'image-element', image: image, alt: 'Brand Image' %}  
-        {% endif %}
-        {% endfor %}
-        {% endif %}        
-        {% endif %}
-        
-        {% if section.settings.show-iconography %} 
-        <h2 class="section-heading">Iconography</h2>
-        <p>{{ section.settings.iconography }}</p>
-        <div class="icon-grid">
-        {% if icon-blocks > 0 %}
-        {% for block in section.blocks %}
-        {% if block.type == 'iconography-image' %}
-        {% assign image = block.settings.iconography-image %}
-          <div>
-        {% render 'image-element', image: image, alt: 'Iconography' %}  
-          </div>
-        {% endif %}
-        {% endfor %}
-        {% endif %}   
         </div>
+
+        {% if section.settings['show-brand-imagery'] %}
+          <h2 class="section-heading">Brand Imagery</h2>
+          <p>{{ section.settings['brand-imagery'] }}</p>
+          {% if brand-blocks > 0 %}
+            {% for block in section.blocks %}
+              {% if block.type == 'brand-image' %}
+                {% assign image = block.settings['brand-image'] %}
+                {% render 'image-element', image: image, alt: 'Brand Image' %}
+              {% endif %}
+            {% endfor %}
+          {% endif %}
         {% endif %}
 
-        {% if section.settings.show-pattern %}
-        <h2 class="section-heading">Pattern and Texture</h2>
-        <p>{{ section.settings.pattern }}</p>
-        {% if pattern-blocks > 0 %}
-          {% for block in section.blocks %}
-            {% if block.type == 'pattern-image' %}
-              {% assign image = block.settings.pattern-image %}
-              {% render 'image-element', image: image, alt: 'Pattern or Texture' %}  
+        {% if section.settings['show-iconography'] %}
+          <h2 class="section-heading">Iconography</h2>
+          <p>{{ section.settings.iconography }}</p>
+          <div class="icon-grid">
+            {% if icon-blocks > 0 %}
+              {% for block in section.blocks %}
+                {% if block.type == 'iconography-image' %}
+                  {% assign image = block.settings['iconography-image'] %}
+                  <div>
+                    {% render 'image-element', image: image, alt: 'Iconography' %}
+                  </div>
+                {% endif %}
+              {% endfor %}
             {% endif %}
-          {% endfor %}
-        {% endif %}   
+          </div>
         {% endif %}
 
-        {% if section.settings.show-shopify-brand-settings %}
-        <h2 class="section-heading">Shopify Brand Setttings</h2>
-        <h3>Brand Colors</h3>
-        <div class="color-array">
-          {% if shop.brand.colors.primary[0].background != blank %}
-            <div>
-            Primary Background - {{ shop.brand.colors.primary[0].background }}
-            <br><div class="color-swatch" style="background-color: {{ shop.brand.colors.primary[0].background }}">&nbsp;</div>
-            </div>
+        {% if section.settings['show-pattern'] %}
+          <h2 class="section-heading">Pattern and Texture</h2>
+          <p>{{ section.settings.pattern }}</p>
+          {% if pattern-blocks > 0 %}
+            {% for block in section.blocks %}
+              {% if block.type == 'pattern-image' %}
+                {% assign image = block.settings['pattern-image'] %}
+                {% render 'image-element', image: image, alt: 'Pattern or Texture' %}
+              {% endif %}
+            {% endfor %}
           {% endif %}
-          {% if shop.brand.colors.primary[0].foreground != blank %}
-            <div>
-            Primary Foreground - {{ shop.brand.colors.primary[0].foreground }}
-            <br><div class="color-swatch" style="background-color: {{ shop.brand.colors.primary[0].foreground }}">&nbsp;</div>
-            </div>
-          {% endif %}
-          {% if shop.brand.colors.secondary[0].background != blank %}
-            <div>
-            Primary Background - {{ shop.brand.colors.secondary[0].background }}
-            <br><div class="color-swatch" style="background-color: {{ shop.brand.colors.secondary[0].background }}">&nbsp;</div>
-            </div>
-          {% endif %}
-          {% if shop.brand.colors.secondary[1].background != blank %}
-            <div>
-            Primary Background - {{ shop.brand.colors.secondary[1].background }}
-            <br><div class="color-swatch" style="background-color: {{ shop.brand.colors.secondary[1].background }}">&nbsp;</div>
-            </div>
-          {% endif %}
-          {% if shop.brand.colors.secondary[0].foreground != blank %}
-            <div>
-            Primary Background - {{ shop.brand.colors.secondary[0].foreground }}
-            <br><div class="color-swatch" style="background-color: {{ shop.brand.colors.secondary[0].foreground }}">&nbsp;</div>
-            </div>
-          {% endif %}
-        </div>
-        
-        <h3>Logos</h3>
+        {% endif %}
+
+        {% if section.settings['show-shopify-brand-settings'] %}
+          <h2 class="section-heading">Shopify Brand Setttings</h2>
+          <h3>Brand Colors</h3>
+          <div class="color-array">
+            {% if shop.brand.colors.primary[0].background != blank %}
+              <div>
+                Primary Background - {{ shop.brand.colors.primary[0].background }}
+                <br>
+                <div class="color-swatch" style="background-color: {{ shop.brand.colors.primary[0].background }}">
+                  &nbsp;
+                </div>
+              </div>
+            {% endif %}
+            {% if shop.brand.colors.primary[0].foreground != blank %}
+              <div>
+                Primary Foreground - {{ shop.brand.colors.primary[0].foreground }}
+                <br>
+                <div class="color-swatch" style="background-color: {{ shop.brand.colors.primary[0].foreground }}">
+                  &nbsp;
+                </div>
+              </div>
+            {% endif %}
+            {% if shop.brand.colors.secondary[0].background != blank %}
+              <div>
+                Primary Background - {{ shop.brand.colors.secondary[0].background }}
+                <br>
+                <div class="color-swatch" style="background-color: {{ shop.brand.colors.secondary[0].background }}">
+                  &nbsp;
+                </div>
+              </div>
+            {% endif %}
+            {% if shop.brand.colors.secondary[1].background != blank %}
+              <div>
+                Primary Background - {{ shop.brand.colors.secondary[1].background }}
+                <br>
+                <div class="color-swatch" style="background-color: {{ shop.brand.colors.secondary[1].background }}">
+                  &nbsp;
+                </div>
+              </div>
+            {% endif %}
+            {% if shop.brand.colors.secondary[0].foreground != blank %}
+              <div>
+                Primary Background - {{ shop.brand.colors.secondary[0].foreground }}
+                <br>
+                <div class="color-swatch" style="background-color: {{ shop.brand.colors.secondary[0].foreground }}">
+                  &nbsp;
+                </div>
+              </div>
+            {% endif %}
+          </div>
+
+          <h3>Logos</h3>
 
           {% if shop.brand.logo != blank %}
-          {%- assign image = shop.brand.logo -%}
-          <h4>Brand Logo </h4>
-          {% render 'image-element', image: image, alt: 'Color Logo' %}      
+            {%- assign image = shop.brand.logo -%}
+            <h4>Brand Logo</h4>
+            {% render 'image-element', image: image, alt: 'Color Logo' %}
           {% endif %}
 
           {% if shop.brand.square_logo != blank %}
-          {%- assign image = shop.brand.square_logo -%}
-          <h4>Square Logo </h4>
-          {% render 'image-element', image: image, alt: 'Square Logo' %}      
+            {%- assign image = shop.brand.square_logo -%}
+            <h4>Square Logo</h4>
+            {% render 'image-element', image: image, alt: 'Square Logo' %}
           {% endif %}
 
           {%- assign image = page_image | img_url -%}
-          <h4>Social Logo </h4>
-        <img src="{{ page_image | img_url }}">
-        
-        <h3>Short Description</h3>
-        <p>{{ shop.brand.short_description }}</p>
-        <h3>Slogan</h3>
-        <p>{{ shop.brand.slogan }}</p>
-        {% endif %}   
+          <h4>Social Logo</h4>
+          <img src="{{ page_image | img_url }}">
 
-        {% if section.settings.show-mood-board %}
-        <h2 class="section-heading">Mood Board</h2>
-        <p>{{ section.settings.mood-board }}</p>
-        {% if mood-blocks > 0 %}
-        <div class="mood-board">
-        {% for block in section.blocks %}
-        {% if block.type == 'mood-image' %}
-        {% assign image = block.settings.mood-image %}
-          <div>
-        {% render 'image-element', image: image, alt: 'Mood Image' %}  
-          </div>
+          <h3>Short Description</h3>
+          <p>{{ shop.brand.short_description }}</p>
+          <h3>Slogan</h3>
+          <p>{{ shop.brand.slogan }}</p>
         {% endif %}
-        {% endfor %}
-        </div>
-        {% endif %}       
+
+        {% if section.settings['show-mood-board'] %}
+          <h2 class="section-heading">Mood Board</h2>
+          <p>{{ section.settings['mood-board'] }}</p>
+          {% if mood-blocks > 0 %}
+            <div class="mood-board">
+              {% for block in section.blocks %}
+                {% if block.type == 'mood-image' %}
+                  {% assign image = block.settings['mood-image'] %}
+                  <div>
+                    {% render 'image-element', image: image, alt: 'Mood Image' %}
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+          {% endif %}
         {% endif %}
-        
       </div>
     </div>
   </div>
-
-
 </section>
-
 
 {% schema %}
 {
@@ -1169,5 +1283,4 @@ id: id
 "category": "JadePuma"
 }]
 }
-
 {% endschema %}
