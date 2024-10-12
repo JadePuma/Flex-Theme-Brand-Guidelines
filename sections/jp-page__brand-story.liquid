@@ -1,0 +1,610 @@
+{% comment %}
+  Custom section created by JadePuma
+  Instructions - https://jadepuma.com/blogs/shopify-tutorials/brand-guidelines-section-for-the-flex-theme
+  Last editted - 10Oct24
+{% endcomment %}
+
+{%- assign id = section.id -%}
+
+{% comment %} Section specific CSS {% endcomment %}
+{%- capture section_css -%}
+
+.section-heading {
+text-align: center;
+color: {{ section.settings.heading-color }}; 
+background-color: {{ section.settings.heading-background-color }};
+margin: 20px 0;
+}
+.inverse {
+padding: 15px;
+background-color: #333;
+}
+.brand-guidelines .heading-divider { margin: 10px 0 30px; }
+
+.typo-table {
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: center;
+}
+
+.typo-table div { padding: 10px; }
+
+.banner__heading, .banner__subheading { background-color: #888888; padding: 10px; }
+
+.color-palette {
+  display: grid;
+  grid-template-columns: 3fr 1fr 2fr;
+  grid-template-rows: repeat(5, 1fr);
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+max-width: 350px;
+margin: 0 auto;
+}
+
+.color-array {
+  display: grid; 
+  grid-auto-rows: 1fr; 
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr; 
+  gap: 10px 10px; 
+  justify-content: center; 
+  align-content: center; 
+  justify-items: center; 
+  align-items: center; 
+}
+.color-array .color-swatch { height: 30px; width: 100%; }
+
+.icon-grid {
+  display: grid; 
+  grid-auto-rows: 1fr; 
+  grid-template-columns: 1fr 1fr 1fr 1fr; 
+  gap: 10px 10px; 
+  justify-content: center; 
+  align-content: center; 
+  justify-items: center; 
+  align-items: center; 
+}
+
+.mood-board {
+  display: grid; 
+  grid-auto-rows: 1fr; 
+  grid-template-columns: 1fr 1fr 1fr; 
+  gap: 10px 10px; 
+  justify-content: center; 
+  align-content: center; 
+  justify-items: center; 
+  align-items: center; 
+}
+
+
+.brand-guidelines { margin-bottom: 25px; }
+
+.brand-guidelines img { padding: 10px; }
+
+{%- endcapture -%}
+
+{% style %}
+  #shopify-section-{{ id }} {
+  padding-top: {{ section.settings.padding_top }}px;
+  padding-bottom: {{ section.settings.padding_bottom }}px;
+  padding-left: {{ section.settings.padding_left }}px;
+  padding-right: {{ section.settings.padding_right }}px;
+  {% if section.settings.width == 'wide' %}
+  width: 100%;
+  {% elsif section.settings.width == 'half' %}
+  width: 50%;
+  {% endif %}
+  }
+
+  {%
+      render 'css-loop',
+  css: section_css,
+  id: id
+  %}
+
+  {%
+      render 'css-loop',
+  css: section.settings.custom_css,
+  id: id
+  %}
+{% endstyle %}
+
+{% assign icon-blocks = 0 %}
+{% assign brand-blocks = 0 %}
+{% assign mood-blocks = 0 %}
+{% assign pattern-blocks = 0 %}
+{% assign color-blocks = 0 %}
+
+{% if section.blocks.size > 0 %}
+  {% for block in section.blocks %}
+    {% if block.type == 'iconography-image' %}
+      {% assign icon-blocks = icon-blocks | plus: 1 %}
+    {% elsif block.type == 'brand-image' %}
+      {% assign brand-blocks = brand-blocks | plus: 1 %}
+    {% elsif block.type == 'mood-image' %}
+      {% assign mood-blocks = mood-blocks | plus: 1 %}
+    {% elsif block.type == 'pattern-image' %}
+      {% assign pattern-blocks = pattern-blocks | plus: 1 %}
+    {% elsif block.type == 'color' %}
+      {% assign color-blocks = color-blocks | plus: 1 %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+{% comment %} HTML markup {% endcomment %}
+<section
+  class="
+    featured-video
+    section
+    {{ section.settings.css_class }}
+    is-width-{{ section.settings.width }}
+    {% if section.settings.mobile_text_below_video == true %}
+    mobile-text--below-media
+    {% else %}
+    mobile-text--over-media
+    {% endif %}
+    {% if video_exists %} has-video-added {% endif %}
+    video-controls-enabled--{{ section.settings.controls }}
+  "
+  {% if section.settings.animation != 'none' %}
+    data-scroll-class="{{ section.settings.animation }}"
+  {% endif %}
+>
+  <div
+    class="
+      container
+      video__container
+      {% if section.settings.width == 'wide' or section.settings.width == 'half' %}
+      equal-columns--outside-trim
+      {% endif %}
+    "
+  >
+    <div class="one-whole column content">
+      <div class="brand-guidelines">
+        {% if section.settings['show-framework'] %}
+          <h2 class="section-heading">Brand Framework</h2>
+          {% if section.settings['mission-statement'] != blank %}
+            <h3>Mission Statement</h3>
+            <p>{{ section.settings['mission-statement'] }}</p>
+          {% endif %}
+          {% if section.settings['vision-statement'] != blank %}
+            <h3>Vision Statement</h3>
+            <p>{{ section.settings['vision-statement'] }}</p>
+          {% endif %}
+          {% if section.settings.usp != blank %}
+            <h3>Unique Selling Propostion (USP)</h3>
+            <p>{{ section.settings.usp }}</p>
+          {% endif %}
+          {% if section.settings['value-propostion'] != blank %}
+            <h3>Value Proposition</h3>
+            <p>{{ section.settings['value-propostion'] }}</p>
+          {% endif %}
+        {% endif %}
+
+        {% if section.settings['show-mission'] %}
+          <h2 class="section-heading">Brand Story</h2>
+          {% if section.settings['about-brand'] != blank %}
+            <h3>About the Brand</h3>
+            <p>{{ section.settings['about-brand'] }}</p>
+          {% endif %}
+          {% if section.settings['about-product'] != blank %}
+            <h3>About the Product</h3>
+            <p>{{ section.settings['about-product'] }}</p>
+          {% endif %}
+          {% if section.settings['product-why'] != blank %}
+            <h3>Higher Level Benefits</h3>
+            <p>{{ section.settings['product-why'] }}</p>
+          {% endif %}
+          {% if section.settings['about-differentiator'] != blank %}
+            <h3>Brand Differentiator</h3>
+            <p>{{ section.settings['about-differentiator'] }}</p>
+          {% endif %}
+          {% if section.settings['target-audience'] != blank %}
+            <h3>Target Audience</h3>
+            <p>{{ section.settings['target-audience'] }}</p>
+          {% endif %}
+          {% if section.settings.mission != blank %}
+            <h3>Mission</h3>
+            <p>{{ section.settings.mission }}</p>
+          {% endif %}
+          {% if section.settings['tone-personality'] != blank %}
+            <h3>Tone / Personality</h3>
+            <p>{{ section.settings['tone-personality'] }}</p>
+          {% endif %}
+        {% endif %}
+
+        {% if section.settings['show-brand-imagery'] %}
+          <h2 class="section-heading">Brand Imagery</h2>
+          <p>{{ section.settings['brand-imagery'] }}</p>
+          {% if brand-blocks > 0 %}
+            {% for block in section.blocks %}
+              {% if block.type == 'brand-image' %}
+                {% assign image = block.settings['brand-image'] %}
+                {% render 'image-element', image: image, alt: 'Brand Image' %}
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        {% endif %}
+
+        {% if section.settings['show-iconography'] %}
+          <h2 class="section-heading">Iconography</h2>
+          <p>{{ section.settings.iconography }}</p>
+          <div class="icon-grid">
+            {% if icon-blocks > 0 %}
+              {% for block in section.blocks %}
+                {% if block.type == 'iconography-image' %}
+                  {% assign image = block.settings['iconography-image'] %}
+                  <div>
+                    {% render 'image-element', image: image, alt: 'Iconography' %}
+                  </div>
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          </div>
+        {% endif %}
+
+        {% if section.settings['show-pattern'] %}
+          <h2 class="section-heading">Pattern and Texture</h2>
+          <p>{{ section.settings.pattern }}</p>
+          {% if pattern-blocks > 0 %}
+            {% for block in section.blocks %}
+              {% if block.type == 'pattern-image' %}
+                {% assign image = block.settings['pattern-image'] %}
+                {% render 'image-element', image: image, alt: 'Pattern or Texture' %}
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        {% endif %}
+
+        {% if section.settings['show-mood-board'] %}
+          <h2 class="section-heading">Mood Board</h2>
+          <p>{{ section.settings['mood-board'] }}</p>
+          {% if mood-blocks > 0 %}
+            <div class="mood-board">
+              {% for block in section.blocks %}
+                {% if block.type == 'mood-image' %}
+                  {% assign image = block.settings['mood-image'] %}
+                  <div>
+                    {% render 'image-element', image: image, alt: 'Mood Image' %}
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+"name": "JP Brand story",
+"class": "brand-guidelines-section overlaid-header-option",
+"templates": ["page"],
+"settings": [
+      {
+        "type": "paragraph",
+        "content": "[See demo](https://flexthemesections.com/pages/jp-brand-guidelines-tool)"
+      },
+{
+"type": "header",
+"content": "Section headings"
+},
+{
+"type": "color",
+"id": "heading-color",
+"label": "Text"
+},
+{
+"type": "color",
+"id": "heading-background-color",
+"label": "Background"
+},
+{
+"type": "header",
+"content": "Brand Framework"
+},
+{
+"type": "checkbox",
+"id": "show-framework",
+"label": "Show section",
+"default": false
+},
+{
+"type": "text",
+"id": "mission-statement",
+"label": "Mission Statement"
+},
+{
+"type": "text",
+"id": "vision-statement",
+"label": "Vision Statement"
+},
+{
+"type": "text",
+"id": "usp",
+"label": "Unique Selling Proposition (USP)"
+},
+{
+"type": "text",
+"id": "value-propostion",
+"label": "Value Proposition"
+},
+{
+"type": "header",
+"content": "Brand Story"
+},
+{
+"type": "checkbox",
+"id": "show-mission",
+"label": "Show section",
+"default": false
+},
+{
+"type": "textarea",
+"id": "about-brand",
+"label": "About the brand"
+},
+{
+"type": "textarea",
+"id": "about-product",
+"label": "About the product/service"
+},
+{
+"type": "textarea",
+"id": "product-why",
+"label": "Higher level benefit of product/service"
+},
+{
+"type": "textarea",
+"id": "about-differentiator",
+"label": "Brand differentiator"
+},
+{
+"type": "textarea",
+"id": "target-audience",
+"label": "Target Audience"
+},
+{
+"type": "textarea",
+"id": "mission",
+"label": "Mission"
+},
+{
+"type": "textarea",
+"id": "tone-personality",
+"label": "Tone / Personality"
+},
+{
+"type": "header",
+"content": "Shopify Brand Settings"
+},
+{
+"type": "header",
+"content": "Brand Imagery"
+},
+{
+"type": "checkbox",
+"id": "show-brand-imagery",
+"label": "Show section",
+"default": false
+},
+{
+"type": "textarea",
+"id": "brand-imagery",
+"label": "Explanation"
+},
+{
+"type": "header",
+"content": "Iconography"
+},
+{
+"type": "checkbox",
+"id": "show-iconography",
+"label": "Show section",
+"default": false
+},
+{
+"type": "textarea",
+"id": "iconography",
+"label": "Explanation"
+},
+{
+"type": "header",
+"content": "Mood Board"
+},
+{
+"type": "checkbox",
+"id": "show-mood-board",
+"label": "Show section",
+"default": false
+},
+{
+"type": "textarea",
+"id": "mood-board",
+"label": "Explanation"
+},
+{
+"type": "header",
+"content": "Pattern and Texture"
+},
+{
+"type": "checkbox",
+"id": "show-pattern",
+"label": "Show section",
+"default": false
+},
+{
+"type": "textarea",
+"id": "pattern",
+"label": "Explanation"
+},
+{
+"type": "header",
+"content": "Layout"
+},
+{
+"type": "select",
+"id": "width",
+"label": "Width",
+"default": "standard",
+"options": [
+{
+"value": "half",
+"label": "Half"
+},
+{
+"value": "standard",
+"label": "Standard"
+},
+{
+"value": "wide",
+"label": "Wide"
+}
+]
+},
+{
+"type": "range",
+"id": "padding_top",
+"label": "Top spacing",
+"min": 0,
+"max": 80,
+"default": 0,
+"unit": "px"
+},
+{
+"type": "range",
+"id": "padding_bottom",
+"label": "Bottom spacing",
+"min": 0,
+"max": 80,
+"default": 0,
+"unit": "px"
+},
+{
+"type": "range",
+"id": "padding_left",
+"label": "Left spacing",
+"min": 0,
+"max": 80,
+"default": 0,
+"unit": "px"
+},
+{
+"type": "range",
+"id": "padding_right",
+"label": "Right spacing",
+"default": 0,
+"min": 0,
+"max": 80,
+"unit": "px"
+},
+{
+"type": "select",
+"id": "animation",
+"label": "Animation",
+"default": "none",
+"options": [
+{
+"value": "none",
+"label": "None"
+},
+{
+"value": "fadeIn",
+"label": "Fade in"
+},
+{
+"value": "fadeInDown",
+"label": "Fade in down"
+},
+{
+"value": "fadeInLeft",
+"label": "Fade in left"
+},
+{
+"value": "fadeInRight",
+"label": "Fade in right"
+},
+{
+"value": "slideInLeft",
+"label": "Slide in left"
+},
+{
+"value": "slideInRight",
+"label": "Slide in right"
+},
+{
+"value": "zoomIn",
+"label": "Zoom in"
+}
+]
+},
+{
+"type": "header",
+"content": "Advanced",
+"info": "[Learn more](https://help.outofthesandbox.com/hc/en-us/articles/360022329373)"
+},
+{
+"type": "text",
+"id": "css_class",
+"label": "CSS Class"
+},
+{
+"type": "textarea",
+"id": "custom_css",
+"label": "Custom CSS"
+}
+],
+  "blocks": [
+    {
+      "type": "iconography-image",
+      "name": "Iconography",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "iconography-image",
+          "label": "Iconography"
+        }
+      ]
+    },
+    {
+      "type": "brand-image",
+      "name": "Brand Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "brand-image",
+          "label": "Brand Image"
+        }
+      ]
+    },
+    {
+      "type": "mood-image",
+      "name": "Mood Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "mood-image",
+          "label": "Mood Image"
+        }
+      ]
+    },
+    {
+      "type": "pattern-image",
+      "name": "Pattern Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "pattern-image",
+          "label": "Pattern Image"
+        }
+      ]
+    }
+  ],
+"presets": [{
+"name": "JP Brand story",
+"category": "JadePuma"
+}]
+}
+{% endschema %}

@@ -1,7 +1,7 @@
 {% comment %}
   Custom section created by JadePuma
   Instructions - https://jadepuma.com/blogs/shopify-tutorials/brand-guidelines-section-for-the-flex-theme
-  Last editted - 6Oct24
+  Last editted - 10Oct24
 {% endcomment %}
 
 {%- assign id = section.id -%}
@@ -160,122 +160,7 @@ margin: 0 auto;
     "
   >
     <div class="one-whole column content">
-      {% comment %}
-        {% render 'heading',
-                title: page.title,
-        heading_tag: 'h1',
-        context: 'page',
-        text_alignment: section.settings.heading_alignment
-        %}
-      {% endcomment %}
-
       <div class="brand-guidelines">
-        {% if section.settings['show-framework'] %}
-          <h2 class="section-heading">Brand Framework</h2>
-          {% if section.settings['mission-statement'] != blank %}
-            <h3>Mission Statement</h3>
-            <p>{{ section.settings['mission-statement'] }}</p>
-          {% endif %}
-          {% if section.settings['vision-statement'] != blank %}
-            <h3>Vision Statement</h3>
-            <p>{{ section.settings['vision-statement'] }}</p>
-          {% endif %}
-          {% if section.settings.usp != blank %}
-            <h3>Unique Selling Propostion (USP)</h3>
-            <p>{{ section.settings.usp }}</p>
-          {% endif %}
-          {% if section.settings['value-propostion'] != blank %}
-            <h3>Value Proposition</h3>
-            <p>{{ section.settings['value-propostion'] }}</p>
-          {% endif %}
-        {% endif %}
-
-        {% if section.settings['show-mission'] %}
-          <h2 class="section-heading">Brand Story</h2>
-          {% if section.settings['about-brand'] != blank %}
-            <h3>About the Brand</h3>
-            <p>{{ section.settings['about-brand'] }}</p>
-          {% endif %}
-          {% if section.settings['about-product'] != blank %}
-            <h3>About the Product</h3>
-            <p>{{ section.settings['about-product'] }}</p>
-          {% endif %}
-          {% if section.settings['product-why'] != blank %}
-            <h3>Higher Level Benefits</h3>
-            <p>{{ section.settings['product-why'] }}</p>
-          {% endif %}
-          {% if section.settings['about-differentiator'] != blank %}
-            <h3>Brand Differentiator</h3>
-            <p>{{ section.settings['about-differentiator'] }}</p>
-          {% endif %}
-          {% if section.settings['target-audience'] != blank %}
-            <h3>Target Audience</h3>
-            <p>{{ section.settings['target-audience'] }}</p>
-          {% endif %}
-          {% if section.settings.mission != blank %}
-            <h3>Mission</h3>
-            <p>{{ section.settings.mission }}</p>
-          {% endif %}
-          {% if section.settings['tone-personality'] != blank %}
-            <h3>Tone / Personality</h3>
-            <p>{{ section.settings['tone-personality'] }}</p>
-          {% endif %}
-        {% endif %}
-
-        {% if section.settings['show-logos'] %}
-          <div class="logos">
-            <h2 class="section-heading">Logos</h2>
-
-            {% if section.settings['logo-color'] %}
-              {%- assign image = section.settings['logo-color'] -%}
-              <h3>Color Logo</h3>
-              {% render 'image-element', image: image, alt: 'Color Logo' %}
-              <div class="heading-divider heading-divider--long"></div>
-            {% endif %}
-
-            {% if section.settings['logo-monochrome'] %}
-              {%- assign image = section.settings['logo-monochrome'] -%}
-              <h3>Monochrome Logo</h3>
-              {% render 'image-element', image: image, alt: 'Monochrome Logo' %}
-              <div class="heading-divider heading-divider--long"></div>
-            {% endif %}
-
-            {% if section.settings['logo-small'] %}
-              {%- assign image = section.settings['logo-small'] -%}
-              <h3>Small Logo</h3>
-              {% render 'image-element', image: image, alt: 'Small Logo' %}
-              <div class="heading-divider heading-divider--long"></div>
-            {% endif %}
-
-            {% if section.settings['logo-vertical'] %}
-              {%- assign image = section.settings['logo-vertical'] -%}
-              <h3>Vertical Logo</h3>
-              {% render 'image-element', image: image, alt: 'Vertical Logo' %}
-              <div class="heading-divider heading-divider--long"></div>
-            {% endif %}
-
-            {% if section.settings['logo-inverse'] %}
-              {%- assign image = section.settings['logo-inverse'] -%}
-              <h3>Inverse Logo</h3>
-              <div class="inverse">
-                {% render 'image-element', image: image, alt: 'Inverse Logo' %}
-              </div>
-              <div class="heading-divider heading-divider--long"></div>
-            {% endif %}
-
-            {% if section.settings['logo-icon'] %}
-              {%- assign image = section.settings['logo-icon'] -%}
-              <h3>Icon Logo</h3>
-              {% render 'image-element', image: image, alt: 'icon Logo' %}
-              <div class="heading-divider heading-divider--long"></div>
-            {% endif %}
-
-            {% if section.settings['logo-font'] != '' %}
-              <p>Logo Font - {{ section.settings['logo-font'] }}</p>
-            {% endif %}
-          </div>
-        {% endif %}
-
         <h2 class="section-heading">Color Palette</h2>
 
         {% if color-blocks > 0 %}
@@ -362,7 +247,6 @@ margin: 0 auto;
           <div>Footer Border</div>
           <div class="color-swatch" style="background-color: {{ settings.footer_border }}"></div>
           <div>{{ settings.footer_border }}</div>
-
         </div>
 
         <h2 class="section-heading">Typography</h2>
@@ -373,41 +257,53 @@ margin: 0 auto;
           <div>
             <p class="body-text">This is body text</p>
           </div>
-          <div>
-            Font - {{ settings.regular__font.family }}
-            <span class="body-text-font"> </span> <br>
-            Style - {{ settings.regular__font.style }}
-            <br>
-            Weight - {{ settings.regular__font.weight }}
-            <br>
-            Size - {{ settings.regular_font_size }}
-            <br>
-            Color - {{ settings.regular_color }}
-          </div>
+          <div class="bodysettings"></div>
         </div>
 
-        {% if section.settings['show-actual-font'] %}
-          <script>
-            document.addEventListener('DOMContentLoaded', function() {
-              var element = document.querySelector('.body-text');
-              var fontDisplayTarget = document.querySelector('.body-text-font');
-
-              if (element && fontDisplayTarget) {
-                var fontFamily = window.getComputedStyle(element).fontFamily;
-
-                // Extract the first font-family by splitting the string by commas
-                var firstFontFamily = fontFamily.split(',')[0].trim(); // Trim removes any extra spaces
-
-                // Create a new span element to display the first font-family
-                var fontDisplay = document.createElement('span');
-                fontDisplay.textContent = ' -- Actual Font: ' + firstFontFamily; // Note the leading space
-
-                // Append the new span element to the .heading1-font element
-                fontDisplayTarget.appendChild(fontDisplay);
+        <script>
+          document.addEventListener('DOMContentLoaded', function () {
+            // Select the element with the class .body-text
+            const bodyTextElement = document.querySelector('.typo-table .body-text');
+            const bodySettingsElement = document.querySelector('.typo-table .bodysettings');
+          
+            if (bodyTextElement && bodySettingsElement) {
+              // Get the computed styles of the .body-text element
+              const computedStyles = window.getComputedStyle(bodyTextElement);
+          
+              // Extract the desired properties
+              const fontFamily = computedStyles.fontFamily;
+              const fontStyle = computedStyles.fontStyle;
+              const fontWeight = computedStyles.fontWeight;
+              const fontSize = computedStyles.fontSize;
+              const color = computedStyles.color;
+          
+              // Function to convert RGB to HEX
+              function rgbToHex(rgb) {
+                const rgbValues = rgb.match(/\d+/g);
+                return rgbValues
+                  ? `#${((1 << 24) + (parseInt(rgbValues[0]) << 16) + (parseInt(rgbValues[1]) << 8) + parseInt(rgbValues[2]))
+                      .toString(16)
+                      .slice(1)}`
+                  : rgb;
               }
-            });
-          </script>
-        {% endif %}
+          
+              // Convert the color to HEX format
+              const colorHex = rgbToHex(color);
+          
+              // Create a string with the extracted values
+              const styleInfo = `
+                Font Family: ${fontFamily}<br>
+                Font Style: ${fontStyle}<br>
+                Font Weight: ${fontWeight}<br>
+                Font Size: ${fontSize}<br>
+                Color: ${colorHex}
+              `;
+          
+              // Set the innerHTML of the .bodysettings element with the extracted values
+              bodySettingsElement.innerHTML = styleInfo;
+            }
+          });
+        </script>
 
         <div class="heading-divider heading-divider--long"></div>
 
@@ -429,61 +325,127 @@ margin: 0 auto;
               </div>
             </div>
           </div>
-          <div>
-            Font - {{ settings.nav__font.family }}
-            <span class="navbar-link-font"> </span> <br>
-            Style - {{ settings.nav__font.style }}
-            <br>
-            Weight - {{ settings.nav__font.weight }}
-            <br>
-            Size - {{ settings.nav_font_size }}
-            <br>
-            Color - {{ settings.header_link_color }}
-          </div>
+          <div class="navbarsettings"></div>
         </div>
 
-        {% if section.settings['show-actual-font'] %}
-          <script>
-            document.addEventListener('DOMContentLoaded', function() {
-              var element = document.querySelector('.navbar-link');
-              var fontDisplayTarget = document.querySelector('.navbar-link-font');
-
-              if (element && fontDisplayTarget) {
-                var fontFamily = window.getComputedStyle(element).fontFamily;
-
-                // Extract the first font-family by splitting the string by commas
-                var firstFontFamily = fontFamily.split(',')[0].trim(); // Trim removes any extra spaces
-
-                // Create a new span element to display the first font-family
-                var fontDisplay = document.createElement('span');
-                fontDisplay.textContent = ' -- Actual Font: ' + firstFontFamily; // Note the leading space
-
-                // Append the new span element to the .heading1-font element
-                fontDisplayTarget.appendChild(fontDisplay);
+        <script>
+          document.addEventListener('DOMContentLoaded', function () {
+            // Select the element with the class .navbar-item
+            const navbarItemElement = document.querySelector('.typo-table .navbar-item');
+            const navbarSettingsElement = document.querySelector('.typo-table .navbarsettings');
+          
+            if (navbarItemElement && navbarSettingsElement) {
+              // Get the computed styles of the .navbar-item element
+              const computedStyles = window.getComputedStyle(navbarItemElement);
+          
+              // Extract the desired properties
+              const fontFamily = computedStyles.fontFamily;
+              const fontStyle = computedStyles.fontStyle;
+              const fontWeight = computedStyles.fontWeight;
+              const fontSize = computedStyles.fontSize;
+              const color = computedStyles.color;
+          
+              // Function to convert RGB color to HEX
+              function rgbToHex(rgb) {
+                const result = rgb.match(/\d+/g);
+                if (result) {
+                  const r = parseInt(result[0], 10).toString(16).padStart(2, '0');
+                  const g = parseInt(result[1], 10).toString(16).padStart(2, '0');
+                  const b = parseInt(result[2], 10).toString(16).padStart(2, '0');
+                  return `#${r}${g}${b}`;
+                }
+                return rgb; // Return the original value if the format is not recognized
               }
-            });
-          </script>
-        {% endif %}
+          
+              // Convert the color to HEX format
+              const hexColor = rgbToHex(color);
+          
+              // Create a string with the extracted values
+              const styleInfo = `
+                Font Family: ${fontFamily}<br>
+                Font Style: ${fontStyle}<br>
+                Font Weight: ${fontWeight}<br>
+                Font Size: ${fontSize}<br>
+                Color: ${hexColor}
+              `;
+          
+              // Set the innerHTML of the .navbarsettings element with the extracted values
+              navbarSettingsElement.innerHTML = styleInfo;
+            }
+          });
+        </script>
 
         <div class="heading-divider heading-divider--long"></div>
 
         <div class="typo-table">
           <div>
-            <div class="buttons is-center">
+            <div class="buttons is-center text-link">
               <a href="#">Text Link</a>
             </div>
           </div>
-          <div>
-            Color - {{ settings.link_color }}
-            <br>
-            Hover Color - {{ settings.link_hover_color }}
-          </div>
+          <div class="text-link-settings"></div>
         </div>
+
+        <script>
+          document.addEventListener('DOMContentLoaded', function () {
+            // Select the element with the class .text-link
+            const bodyTextElement = document.querySelector('.typo-table .text-link');
+            const bodySettingsElement = document.querySelector('.typo-table .text-link-settings');
+          
+            if (bodyTextElement && bodySettingsElement) {
+              // Get the computed styles of the .text-link element
+              const computedStyles = window.getComputedStyle(bodyTextElement);
+          
+              // Extract the desired properties
+              const fontFamily = computedStyles.fontFamily;
+              const fontStyle = computedStyles.fontStyle;
+              const fontWeight = computedStyles.fontWeight;
+              const fontSize = computedStyles.fontSize;
+              const color = computedStyles.color;
+          
+              // Function to convert RGB to HEX
+              function rgbToHex(rgb) {
+                const rgbValues = rgb.match(/\d+/g);
+                return rgbValues
+                  ? `#${((1 << 24) + (parseInt(rgbValues[0]) << 16) + (parseInt(rgbValues[1]) << 8) + parseInt(rgbValues[2]))
+                      .toString(16)
+                      .slice(1)}`
+                  : rgb;
+              }
+          
+              // Convert the color to HEX format
+              const colorHex = rgbToHex(color);
+          
+              // Create a string with the extracted values
+              const styleInfo = `
+                Font Family: ${fontFamily}<br>
+                Font Style: ${fontStyle}<br>
+                Font Weight: ${fontWeight}<br>
+                Font Size: ${fontSize}<br>
+                Color: ${colorHex}
+              `;
+          
+              // Set the innerHTML of the .text-link-settings element with the extracted values
+              bodySettingsElement.innerHTML = styleInfo;
+            }
+          });
+        </script>
 
         <div class="typo-table">
           <div>
             <div class="buttons is-center"><a href="#" class="button button--primary ">Primary Button</a></div>
+          </div>
+          <div class="primary-button-settings"></div>
+        </div>
+
+        <div class="typo-table">
+          <div>
             <div class="buttons is-center"><a href="#" class="button button--secondary ">Secondary Button</a></div>
+          </div>
+          <div class="secondary-button-settings"></div>
+        </div>
+        <div class="typo-table">
+          <div>
             <button
               type="submit"
               name="add"
@@ -494,39 +456,8 @@ margin: 0 auto;
               <span class="text">Add to cart</span>
             </button>
           </div>
-          <div>
-            Font - {{ settings.button__font.family }}
-            <span class="button-font"> </span> <br>
-            Style - {{ settings.button__font.style }}
-            <br>
-            Weight - {{ settings.button__font.weight }}
-            <br>
-            Size - {{ settings.regular_font_size }}
-          </div>
+          <div class="add-to-cart-button-settings"></div>
         </div>
-
-        {% if section.settings['show-actual-font'] %}
-          <script>
-            document.addEventListener('DOMContentLoaded', function() {
-              var element = document.querySelector('.button');
-              var fontDisplayTarget = document.querySelector('.button-font');
-
-              if (element && fontDisplayTarget) {
-                var fontFamily = window.getComputedStyle(element).fontFamily;
-
-                // Extract the first font-family by splitting the string by commas
-                var firstFontFamily = fontFamily.split(',')[0].trim(); // Trim removes any extra spaces
-
-                // Create a new span element to display the first font-family
-                var fontDisplay = document.createElement('span');
-                fontDisplay.textContent = ' -- Actual Font: ' + firstFontFamily; // Note the leading space
-
-                // Append the new span element to the .heading1-font element
-                fontDisplayTarget.appendChild(fontDisplay);
-              }
-            });
-          </script>
-        {% endif %}
 
         <div class="heading-divider heading-divider--long"></div>
 
@@ -534,55 +465,92 @@ margin: 0 auto;
           <div>
             <p class="heading-section__preheading">Pre-Heading</p>
           </div>
-          <div>
-            Font - {{ settings.preheading_font.family }}
-            <br>
-            Style - {{ settings.preheading_font.style }}
-            <br>
-            Weight - {{ settings.preheading_font.weight }}
-            <br>
-            Size - {{ settings.preheading_size }}
-          </div>
+          <div class="preheading-settings"></div>
         </div>
+
+        <script>
+          document.addEventListener('DOMContentLoaded', function () {
+            // Select the element with the class .heading-section__preheading
+            const bodyTextElement = document.querySelector('.typo-table .heading-section__preheading');
+            const bodySettingsElement = document.querySelector('.typo-table .preheading-settings');
+          
+            if (bodyTextElement && bodySettingsElement) {
+              // Get the computed styles of the .heading-section__preheading element
+              const computedStyles = window.getComputedStyle(bodyTextElement);
+          
+              // Extract the desired properties
+              const fontFamily = computedStyles.fontFamily;
+              const fontStyle = computedStyles.fontStyle;
+              const fontWeight = computedStyles.fontWeight;
+              const fontSize = computedStyles.fontSize;
+              const color = computedStyles.color;
+          
+              // Function to convert RGB to HEX
+              function rgbToHex(rgb) {
+                const rgbValues = rgb.match(/\d+/g);
+                return rgbValues
+                  ? `#${((1 << 24) + (parseInt(rgbValues[0]) << 16) + (parseInt(rgbValues[1]) << 8) + parseInt(rgbValues[2]))
+                      .toString(16)
+                      .slice(1)}`
+                  : rgb;
+              }
+          
+              // Convert the color to HEX format
+              const colorHex = rgbToHex(color);
+          
+              // Create a string with the extracted values
+              const styleInfo = `
+                Font Family: ${fontFamily}<br>
+                Font Style: ${fontStyle}<br>
+                Font Weight: ${fontWeight}<br>
+                Font Size: ${fontSize}<br>
+                Color: ${colorHex}
+              `;
+          
+              // Set the innerHTML of the .preheading-settings element with the extracted values
+              bodySettingsElement.innerHTML = styleInfo;
+            }
+          });
+        </script>
 
         <div class="heading-divider heading-divider--long"></div>
 
-<div class="typo-table">
-  <div>
-    <h1 class="heading1">This is H1 text</h1>
-  </div>
-  <div class="heading1settings"></div>
-</div>
+        <div class="typo-table">
+          <div>
+            <h1 class="heading1">This is H1 text</h1>
+          </div>
+          <div class="heading1settings"></div>
+        </div>
 
-<div class="typo-table">
-  <div>
-    <h2 class="heading2">This is H2 text</h2>
-  </div>
-  <div class="heading2settings"></div>
-</div>
+        <div class="typo-table">
+          <div>
+            <h2 class="heading2">This is H2 text</h2>
+          </div>
+          <div class="heading2settings"></div>
+        </div>
 
-<div class="typo-table">
-  <div>
-    <h3 class="heading3">This is H3 text</h3>
-  </div>
-  <div class="heading3settings"></div>
-</div>
+        <div class="typo-table">
+          <div>
+            <h3 class="heading3">This is H3 text</h3>
+          </div>
+          <div class="heading3settings"></div>
+        </div>
 
-<div class="typo-table">
-  <div>
-    <h4 class="heading4">This is H4 text</h4>
-  </div>
-  <div class="heading4settings"></div>
-</div>
+        <div class="typo-table">
+          <div>
+            <h4 class="heading4">This is H4 text</h4>
+          </div>
+          <div class="heading4settings"></div>
+        </div>
 
-<div class="typo-table">
-  <div>
-    <h5 class="heading5">This is H5 text</h5>
-  </div>
-  <div class="heading5settings"></div>
-</div>
+        <div class="typo-table">
+          <div>
+            <h5 class="heading5">This is H5 text</h5>
+          </div>
+          <div class="heading5settings"></div>
+        </div>
 
-<script>
+        <script>
   // Define an array of heading levels and corresponding class suffixes
   const headingLevels = [1, 2, 3, 4, 5];
 
@@ -638,8 +606,7 @@ margin: 0 auto;
     }
     return rgb; // Fallback to the original value if conversion fails
   }
-</script>
-
+        </script>
 
         <div class="heading-divider heading-divider--long"></div>
 
@@ -647,16 +614,53 @@ margin: 0 auto;
           <div>
             <p class="heading-section__subheading">Sub-Heading</p>
           </div>
-          <div>
-            Font - {{ settings.subheading_font.family }}
-            <br>
-            Style - {{ settings.subheading_font.style }}
-            <br>
-            Weight - {{ settings.subheading_font.weight }}
-            <br>
-            Size - {{ settings.subheading_size }}
-          </div>
+          <div class="subheading-settings"></div>
         </div>
+
+        <script>
+          document.addEventListener('DOMContentLoaded', function () {
+            // Select the element with the class .heading-section__subheading
+            const bodyTextElement = document.querySelector('.typo-table .heading-section__subheading');
+            const bodySettingsElement = document.querySelector('.typo-table .subheading-settings');
+          
+            if (bodyTextElement && bodySettingsElement) {
+              // Get the computed styles of the .heading-section__subheading element
+              const computedStyles = window.getComputedStyle(bodyTextElement);
+          
+              // Extract the desired properties
+              const fontFamily = computedStyles.fontFamily;
+              const fontStyle = computedStyles.fontStyle;
+              const fontWeight = computedStyles.fontWeight;
+              const fontSize = computedStyles.fontSize;
+              const color = computedStyles.color;
+          
+              // Function to convert RGB to HEX
+              function rgbToHex(rgb) {
+                const rgbValues = rgb.match(/\d+/g);
+                return rgbValues
+                  ? `#${((1 << 24) + (parseInt(rgbValues[0]) << 16) + (parseInt(rgbValues[1]) << 8) + parseInt(rgbValues[2]))
+                      .toString(16)
+                      .slice(1)}`
+                  : rgb;
+              }
+          
+              // Convert the color to HEX format
+              const colorHex = rgbToHex(color);
+          
+              // Create a string with the extracted values
+              const styleInfo = `
+                Font Family: ${fontFamily}<br>
+                Font Style: ${fontStyle}<br>
+                Font Weight: ${fontWeight}<br>
+                Font Size: ${fontSize}<br>
+                Color: ${colorHex}
+              `;
+          
+              // Set the innerHTML of the .subheading-settings element with the extracted values
+              bodySettingsElement.innerHTML = styleInfo;
+            }
+          });
+        </script>
 
         <div class="heading-divider heading-divider--long"></div>
 
@@ -664,100 +668,158 @@ margin: 0 auto;
           <div>
             <p class="banner__heading">Banner Heading</p>
           </div>
-          <div>
-            Font - {{ settings.banner_heading__font.family }}
-            <span class="banner__heading-font"></span> <br>
-            Style - {{ settings.banner_heading__font.style }}
-            <br>
-            Weight - {{ settings.banner_heading__font.weight }}
-            <br>
-            Size - {{ settings.banner_heading_size }}
-            <br>
-            Color - {{ settings.banner_heading_color }}
-          </div>
+          <div class="banner-heading-settings"></div>
         </div>
 
-        {% if section.settings['show-actual-font'] %}
-          <script>
-            document.addEventListener('DOMContentLoaded', function() {
-              var element = document.querySelector('.banner__heading');
-              var fontDisplayTarget = document.querySelector('.banner__heading-font');
-
-              if (element && fontDisplayTarget) {
-                var fontFamily = window.getComputedStyle(element).fontFamily;
-
-                // Extract the first font-family by splitting the string by commas
-                var firstFontFamily = fontFamily.split(',')[0].trim(); // Trim removes any extra spaces
-
-                // Create a new span element to display the first font-family
-                var fontDisplay = document.createElement('span');
-                fontDisplay.textContent = ' -- Actual Font: ' + firstFontFamily; // Note the leading space
-
-                // Append the new span element to the .heading1-font element
-                fontDisplayTarget.appendChild(fontDisplay);
+        <script>
+          document.addEventListener('DOMContentLoaded', function () {
+            // Select the element with the class .banner__heading
+            const bodyTextElement = document.querySelector('.typo-table .banner__heading');
+            const bodySettingsElement = document.querySelector('.typo-table .banner-heading-settings');
+          
+            if (bodyTextElement && bodySettingsElement) {
+              // Get the computed styles of the .banner__heading element
+              const computedStyles = window.getComputedStyle(bodyTextElement);
+          
+              // Extract the desired properties
+              const fontFamily = computedStyles.fontFamily;
+              const fontStyle = computedStyles.fontStyle;
+              const fontWeight = computedStyles.fontWeight;
+              const fontSize = computedStyles.fontSize;
+              const color = computedStyles.color;
+          
+              // Function to convert RGB to HEX
+              function rgbToHex(rgb) {
+                const rgbValues = rgb.match(/\d+/g);
+                return rgbValues
+                  ? `#${((1 << 24) + (parseInt(rgbValues[0]) << 16) + (parseInt(rgbValues[1]) << 8) + parseInt(rgbValues[2]))
+                      .toString(16)
+                      .slice(1)}`
+                  : rgb;
               }
-            });
-          </script>
-        {% endif %}
-
-        <div class="heading-divider heading-divider--long"></div>
+          
+              // Convert the color to HEX format
+              const colorHex = rgbToHex(color);
+          
+              // Create a string with the extracted values
+              const styleInfo = `
+                Font Family: ${fontFamily}<br>
+                Font Style: ${fontStyle}<br>
+                Font Weight: ${fontWeight}<br>
+                Font Size: ${fontSize}<br>
+                Color: ${colorHex}
+              `;
+          
+              // Set the innerHTML of the .banner-heading-settings element with the extracted values
+              bodySettingsElement.innerHTML = styleInfo;
+            }
+          });
+        </script>
 
         <div class="typo-table">
           <div>
             <p class="banner__subheading">This is Banner Text</p>
           </div>
-          <div>
-            Font - {{ settings.banner_text__font.family }}
-            <br>
-            Style - {{ settings.banner_text__font.style }}
-            <br>
-            Weight - {{ settings.banner_text__font.weight }}
-            <br>
-            Size - {{ settings.banner_text_size }}
-          </div>
+          <div class="banner-subheading-settings"></div>
         </div>
 
-        {% if section.settings['show-brand-imagery'] %}
-          <h2 class="section-heading">Brand Imagery</h2>
-          <p>{{ section.settings['brand-imagery'] }}</p>
-          {% if brand-blocks > 0 %}
-            {% for block in section.blocks %}
-              {% if block.type == 'brand-image' %}
-                {% assign image = block.settings['brand-image'] %}
-                {% render 'image-element', image: image, alt: 'Brand Image' %}
-              {% endif %}
-            {% endfor %}
-          {% endif %}
-        {% endif %}
+        <script>
+          document.addEventListener('DOMContentLoaded', function () {
+            // Select the element with the class .banner__subheading
+            const bodyTextElement = document.querySelector('.typo-table .banner__subheading');
+            const bodySettingsElement = document.querySelector('.typo-table .banner-subheading-settings');
+          
+            if (bodyTextElement && bodySettingsElement) {
+              // Get the computed styles of the .banner__subheading element
+              const computedStyles = window.getComputedStyle(bodyTextElement);
+          
+              // Extract the desired properties
+              const fontFamily = computedStyles.fontFamily;
+              const fontStyle = computedStyles.fontStyle;
+              const fontWeight = computedStyles.fontWeight;
+              const fontSize = computedStyles.fontSize;
+              const color = computedStyles.color;
+          
+              // Function to convert RGB to HEX
+              function rgbToHex(rgb) {
+                const rgbValues = rgb.match(/\d+/g);
+                return rgbValues
+                  ? `#${((1 << 24) + (parseInt(rgbValues[0]) << 16) + (parseInt(rgbValues[1]) << 8) + parseInt(rgbValues[2]))
+                      .toString(16)
+                      .slice(1)}`
+                  : rgb;
+              }
+          
+              // Convert the color to HEX format
+              const colorHex = rgbToHex(color);
+          
+              // Create a string with the extracted values
+              const styleInfo = `
+                Font Family: ${fontFamily}<br>
+                Font Style: ${fontStyle}<br>
+                Font Weight: ${fontWeight}<br>
+                Font Size: ${fontSize}<br>
+                Color: ${colorHex}
+              `;
+          
+              // Set the innerHTML of the .banner-subheading-settings element with the extracted values
+              bodySettingsElement.innerHTML = styleInfo;
+            }
+          });
+        </script>
 
-        {% if section.settings['show-iconography'] %}
-          <h2 class="section-heading">Iconography</h2>
-          <p>{{ section.settings.iconography }}</p>
-          <div class="icon-grid">
-            {% if icon-blocks > 0 %}
-              {% for block in section.blocks %}
-                {% if block.type == 'iconography-image' %}
-                  {% assign image = block.settings['iconography-image'] %}
-                  <div>
-                    {% render 'image-element', image: image, alt: 'Iconography' %}
-                  </div>
-                {% endif %}
-              {% endfor %}
+        {% if section.settings['show-logos'] %}
+          <div class="logos">
+            <h2 class="section-heading">Logos</h2>
+
+            {% if section.settings['logo-color'] %}
+              {%- assign image = section.settings['logo-color'] -%}
+              <h3>Color Logo</h3>
+              {% render 'image-element', image: image, alt: 'Color Logo' %}
+              <div class="heading-divider heading-divider--long"></div>
+            {% endif %}
+
+            {% if section.settings['logo-monochrome'] %}
+              {%- assign image = section.settings['logo-monochrome'] -%}
+              <h3>Monochrome Logo</h3>
+              {% render 'image-element', image: image, alt: 'Monochrome Logo' %}
+              <div class="heading-divider heading-divider--long"></div>
+            {% endif %}
+
+            {% if section.settings['logo-small'] %}
+              {%- assign image = section.settings['logo-small'] -%}
+              <h3>Small Logo</h3>
+              {% render 'image-element', image: image, alt: 'Small Logo' %}
+              <div class="heading-divider heading-divider--long"></div>
+            {% endif %}
+
+            {% if section.settings['logo-vertical'] %}
+              {%- assign image = section.settings['logo-vertical'] -%}
+              <h3>Vertical Logo</h3>
+              {% render 'image-element', image: image, alt: 'Vertical Logo' %}
+              <div class="heading-divider heading-divider--long"></div>
+            {% endif %}
+
+            {% if section.settings['logo-inverse'] %}
+              {%- assign image = section.settings['logo-inverse'] -%}
+              <h3>Inverse Logo</h3>
+              <div class="inverse">
+                {% render 'image-element', image: image, alt: 'Inverse Logo' %}
+              </div>
+              <div class="heading-divider heading-divider--long"></div>
+            {% endif %}
+
+            {% if section.settings['logo-icon'] %}
+              {%- assign image = section.settings['logo-icon'] -%}
+              <h3>Icon Logo</h3>
+              {% render 'image-element', image: image, alt: 'icon Logo' %}
+              <div class="heading-divider heading-divider--long"></div>
+            {% endif %}
+
+            {% if section.settings['logo-font'] != '' %}
+              <p>Logo Font - {{ section.settings['logo-font'] }}</p>
             {% endif %}
           </div>
-        {% endif %}
-
-        {% if section.settings['show-pattern'] %}
-          <h2 class="section-heading">Pattern and Texture</h2>
-          <p>{{ section.settings.pattern }}</p>
-          {% if pattern-blocks > 0 %}
-            {% for block in section.blocks %}
-              {% if block.type == 'pattern-image' %}
-                {% assign image = block.settings['pattern-image'] %}
-                {% render 'image-element', image: image, alt: 'Pattern or Texture' %}
-              {% endif %}
-            {% endfor %}
-          {% endif %}
         {% endif %}
 
         {% if section.settings['show-shopify-brand-settings'] %}
@@ -833,23 +895,6 @@ margin: 0 auto;
           <p>{{ shop.brand.short_description }}</p>
           <h3>Slogan</h3>
           <p>{{ shop.brand.slogan }}</p>
-        {% endif %}
-
-        {% if section.settings['show-mood-board'] %}
-          <h2 class="section-heading">Mood Board</h2>
-          <p>{{ section.settings['mood-board'] }}</p>
-          {% if mood-blocks > 0 %}
-            <div class="mood-board">
-              {% for block in section.blocks %}
-                {% if block.type == 'mood-image' %}
-                  {% assign image = block.settings['mood-image'] %}
-                  <div>
-                    {% render 'image-element', image: image, alt: 'Mood Image' %}
-                  </div>
-                {% endif %}
-              {% endfor %}
-            </div>
-          {% endif %}
         {% endif %}
       </div>
     </div>
@@ -930,90 +975,9 @@ margin: 0 auto;
 "content": "Typography"
 },
 {
-"type": "checkbox",
-"id": "show-actual-font",
-"label": "Show actual font",
-"default": false
-},
-{
 "type": "textarea",
 "id": "typography",
 "label": "Explanation"
-},
-{
-"type": "header",
-"content": "Brand Framework"
-},
-{
-"type": "checkbox",
-"id": "show-framework",
-"label": "Show section",
-"default": false
-},
-{
-"type": "text",
-"id": "mission-statement",
-"label": "Mission Statement"
-},
-{
-"type": "text",
-"id": "vision-statement",
-"label": "Vision Statement"
-},
-{
-"type": "text",
-"id": "usp",
-"label": "Unique Selling Proposition (USP)"
-},
-{
-"type": "text",
-"id": "value-propostion",
-"label": "Value Proposition"
-},
-{
-"type": "header",
-"content": "Brand Story"
-},
-{
-"type": "checkbox",
-"id": "show-mission",
-"label": "Show section",
-"default": false
-},
-{
-"type": "textarea",
-"id": "about-brand",
-"label": "About the brand"
-},
-{
-"type": "textarea",
-"id": "about-product",
-"label": "About the product/service"
-},
-{
-"type": "textarea",
-"id": "product-why",
-"label": "Higher level benefit of product/service"
-},
-{
-"type": "textarea",
-"id": "about-differentiator",
-"label": "Brand differentiator"
-},
-{
-"type": "textarea",
-"id": "target-audience",
-"label": "Target Audience"
-},
-{
-"type": "textarea",
-"id": "mission",
-"label": "Mission"
-},
-{
-"type": "textarea",
-"id": "tone-personality",
-"label": "Tone / Personality"
 },
 {
 "type": "header",
@@ -1024,66 +988,6 @@ margin: 0 auto;
 "id": "show-shopify-brand-settings",
 "label": "Show Shopify brand settings",
 "default": false
-},
-{
-"type": "header",
-"content": "Brand Imagery"
-},
-{
-"type": "checkbox",
-"id": "show-brand-imagery",
-"label": "Show section",
-"default": false
-},
-{
-"type": "textarea",
-"id": "brand-imagery",
-"label": "Explanation"
-},
-{
-"type": "header",
-"content": "Iconography"
-},
-{
-"type": "checkbox",
-"id": "show-iconography",
-"label": "Show section",
-"default": false
-},
-{
-"type": "textarea",
-"id": "iconography",
-"label": "Explanation"
-},
-{
-"type": "header",
-"content": "Mood Board"
-},
-{
-"type": "checkbox",
-"id": "show-mood-board",
-"label": "Show section",
-"default": false
-},
-{
-"type": "textarea",
-"id": "mood-board",
-"label": "Explanation"
-},
-{
-"type": "header",
-"content": "Pattern and Texture"
-},
-{
-"type": "checkbox",
-"id": "show-pattern",
-"label": "Show section",
-"default": false
-},
-{
-"type": "textarea",
-"id": "pattern",
-"label": "Explanation"
 },
 {
 "type": "header",
@@ -1202,50 +1106,6 @@ margin: 0 auto;
 }
 ],
   "blocks": [
-    {
-      "type": "iconography-image",
-      "name": "Iconography",
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "iconography-image",
-          "label": "Iconography"
-        }
-      ]
-    },
-    {
-      "type": "brand-image",
-      "name": "Brand Image",
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "brand-image",
-          "label": "Brand Image"
-        }
-      ]
-    },
-    {
-      "type": "mood-image",
-      "name": "Mood Image",
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "mood-image",
-          "label": "Mood Image"
-        }
-      ]
-    },
-    {
-      "type": "pattern-image",
-      "name": "Pattern Image",
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "pattern-image",
-          "label": "Pattern Image"
-        }
-      ]
-    },
     {
       "type": "color",
       "name": "Color",
